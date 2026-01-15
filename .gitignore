@@ -19,6 +19,9 @@ ENV/
 *.csv
 *.json
 *.html
+*.png
+*.jpg
+*.jpeg
 
 # IDE
 .vscode/
