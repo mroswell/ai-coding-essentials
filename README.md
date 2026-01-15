@@ -1,108 +1,118 @@
 # AI Coding Essentials
 
-Three-afternoon workshop on essential AI coding skills for data science beginners.
+**Three-afternoon workshop on essential AI coding skills**
 
-## Overview
+Learn to understand data formats, create interactive visualizations, and use professional development tools. No prior programming experience required.
 
-This repository contains four hands-on Jupyter notebook exercises designed to teach fundamental data science skills. Each notebook includes explanations, TODO tasks, and opportunities to create outputs you can share.
+---
 
-## Notebooks
+## What You'll Learn
 
-### 1. JSON Basics (`01_json_basics.ipynb`)
-Learn the fundamentals of working with JSON data in Python:
-- Creating JSON objects and nested data structures
-- Converting JSON to Pandas DataFrames
-- Saving and loading JSON files
-- Working with JSON strings and APIs
+- **Understand five essential file formats:** YAML, HTML, Markdown, CSV, and JSON
+- **Build a portfolio website** with GitHub Pages
+- **Write basic Python code** to work with data and create visualizations
+- **Create interactive maps** using the Folium library
+- **Analyze datasets** using Pandas
+- **Use AI assistants effectively** as coding partners
+- **Use GitHub and Codespaces** for professional workflows
 
-### 2. Markdown Fundamentals (`02_markdown_fundamentals.ipynb`)
-Master Markdown for documentation and communication:
-- Headers, text formatting, and lists
-- Links, images, and tables
-- Code blocks with syntax highlighting
-- Generating documentation from data
+---
 
-### 3. Interactive Mapping with Folium (`03_interactive_mapping_folium.ipynb`)
-Create beautiful interactive maps:
-- Understanding geographic coordinates
-- Adding markers and custom icons
-- Creating rich HTML popups
-- Using different map styles
-- Saving and sharing maps
+## Workshop Structure
 
-### 4. Pandas Data Analysis (`04_pandas_data_analysis.ipynb`)
-Perform comprehensive data analysis:
-- Loading and exploring CSV data
-- Data filtering, sorting, and aggregation
-- Creating visualizations with Matplotlib
-- Combining Pandas data with Folium maps
-- Complete end-to-end data analysis projects
+### Afternoon 1: Build Your Portfolio Website
+**Focus:** Web formats and deployment
+
+Learn YAML, HTML, and Markdown with an AI chatbot, then build and deploy your portfolio website using GitHub Pages. You'll have a live site at `yourusername.github.io` by the end of the session.
+
+### Afternoon 2: Data Analysis and Visualization
+**Focus:** Data formats and interactive projects
+
+Learn CSV and JSON formats, then use Google Colab to build interactive maps and analyze datasets with Python. Create visualizations you can add to your portfolio.
+
+### Afternoon 3: Professional Development Workflows
+**Focus:** Organization and best practices
+
+Use GitHub Codespaces to organize your projects professionally, convert notebooks to proper Python scripts, and update your portfolio with your completed work.
+
+---
 
 ## Getting Started
 
-### Prerequisites
+### For Students
 
-- Python 3.8 or higher
-- pip (Python package installer)
+**Before Afternoon 1:**
+1. Choose an AI chatbot: [Claude](https://claude.ai), [ChatGPT](https://chat.openai.com), or [Gemini](https://gemini.google.com)
+2. Create a free GitHub account at [github.com](https://github.com)
 
-### Installation
+**Afternoon 2 - Using Google Colab:**
+1. Exercise links will be provided during the workshop
+2. Click the Colab link for each exercise
+3. Click "Copy to Drive" to save your own version
+4. Work through the exercises
 
-1. Clone this repository:
-```bash
-git clone https://github.com/mroswell/ai-coding-essentials.git
-cd ai-coding-essentials
-```
+**Afternoon 3 - Using GitHub Codespaces:**
+1. Fork this repository (click "Fork" button in upper right)
+2. In your fork, click the green "Code" button
+3. Click the "Codespaces" tab
+4. Click "Create codespace on main"
+5. Wait 1-2 minutes for your environment to build
+6. All Python packages will be automatically installed
 
-2. Install required packages:
-```bash
-pip install -r requirements.txt
-```
+**Managing Your Codespace:**
+- Codespaces auto-stop after 30 minutes of inactivity
+- Stop manually: Go to [github.com/codespaces](https://github.com/codespaces), click three dots, select "Stop"
+- You get 60 free hours per month
+- Check usage at: Settings → Billing
 
-3. Launch Jupyter Notebook:
-```bash
-jupyter notebook
-```
+---
 
-4. Open any notebook to begin learning!
+## Prerequisites
 
-## Recommended Order
+**Required:**
+- Web browser
+- Google account (for Colab)
+- GitHub account (free)
+- Willingness to experiment
 
-Work through the notebooks in numerical order:
-1. Start with JSON basics to understand data structures
-2. Learn Markdown for documentation skills
-3. Explore Folium for geographic visualization
-4. Complete the Pandas notebook that combines everything
+**Not required:**
+- Programming experience
+- Powerful computer (everything runs in the cloud)
+- Money (all tools have free tiers)
 
-## What You'll Create
+---
 
-Each notebook includes exercises and challenges where you'll create:
-- JSON data files
-- Markdown documentation and reports
-- Interactive HTML maps
-- Data visualizations (charts and graphs)
-- Complete data analysis projects
+## Tools We'll Use
 
-**Share your outputs!** Take screenshots of your visualizations and export your maps to showcase your learning.
+- **AI Chatbots** (Claude, ChatGPT, or Gemini) - Your learning partner
+- **GitHub Pages** - Free website hosting
+- **Google Colab** - Cloud-based Python notebooks (unlimited free usage)
+- **GitHub Codespaces** - Professional development environment (60 free hours/month)
 
-## Tips for Success
+---
 
-- Complete all TODO tasks in each notebook
-- Try the challenge exercises at the end of each notebook
-- Experiment with your own data and ideas
-- Share your work with classmates or colleagues
-- Save your notebooks regularly
+## Exercises
+
+Detailed exercise files are in the repository:
+- **Afternoon 2:** Jupyter notebooks for JSON, Markdown, Mapping, and Data Analysis
+- **Afternoon 3:** Instructions for organizing projects and updating your portfolio
+
+---
 
 ## Resources
 
-- [Pandas Documentation](https://pandas.pydata.org/docs/)
-- [Folium Documentation](https://python-visualization.github.io/folium/)
 - [Markdown Guide](https://www.markdownguide.org/)
-- [Python JSON Documentation](https://docs.python.org/3/library/json.html)
+- [GitHub Pages Guide](https://pages.github.com/)
+- [Python Documentation](https://docs.python.org/3/)
+- [Pandas Tutorials](https://pandas.pydata.org/docs/getting_started/intro_tutorials/)
+- [Folium Documentation](https://python-visualization.github.io/folium/)
 
-## License
+---
 
-This project is provided as educational material for workshop participants.
+## Questions?
 
-## Contributing
+Open an Issue in this repository or ask during the workshop.
 
-Feedback and suggestions are welcome! Please open an issue or submit a pull request.
+---
+
+**Ready to start learning?** 🚀
