@@ -10,6 +10,6 @@
       ]
     }
   },
-  "postCreateCommand": "pip install --user -r requirements.txt",
+  "postCreateCommand": "pip install --user -r requirements.txt && npm install -g yamlresume",
   "forwardPorts": [8888]
 }
