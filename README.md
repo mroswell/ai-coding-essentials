@@ -8,11 +8,10 @@ Learn to understand data formats, create interactive visualizations, and use pro
 
 ## What You'll Learn
 
-- **Understand five essential file formats:** CSV, HTML, Markdown, JSON, and YAML
+- **Understand six essential file formats:** CSV, HTML, JSON, Markdown, Python, and YAML
 - **Build a portfolio website** with GitHub Pages
-- **Write basic Python code** to work with data and create visualizations
+- **Write basic Python code** to work with data
 - **Create interactive maps** using the Folium library
-- **Analyze datasets** using Pandas
 - **Use AI assistants effectively** as coding partners
 - **Use GitHub and Codespaces** for professional workflows
 
