@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Developer Skills Progress Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .legend {
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .legend h2 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .legend-items {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-box {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .legend-box.unknown {
+            background: white;
+        }
+
+        .legend-box.familiar {
+            background: #a8dadc;
+        }
+
+        .legend-box.know {
+            background: #1d3557;
+        }
+
+        .grid-container {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .skill-card {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            min-height: 85px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .skill-card:active {
+            transform: translateY(0);
+        }
+
+        .skill-card.state-unknown {
+            background: white;
+        }
+
+        .skill-card.state-familiar {
+            background: #a8dadc;
+            border-color: #457b9d;
+        }
+
+        .skill-card.state-know {
+            background: #1d3557;
+            border-color: #1d3557;
+            color: white;
+        }
+
+        .skill-text {
+            font-size: 0.95em;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: #457b9d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-weight: 500;
+        }
+
+        button:hover {
+            background: #1d3557;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .stats {
+            background: #f1faee;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            font-size: 1.1em;
+        }
+
+        .stat-number {
+            font-weight: bold;
+            color: #1d3557;
+            font-size: 1.3em;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 20px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            .skill-card {
+                min-height: 80px;
+                padding: 10px;
+            }
+            
+            .skill-text {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Developer Skills Progress Tracker</h1>
+            <p class="subtitle">Click each skill to track your progress</p>
+        </header>
+
+        <div class="legend">
+            <h2>How to Use:</h2>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="legend-box unknown"></div>
+                    <span>I don't know this</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box familiar"></div>
+                    <span>Some familiarity</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box know"></div>
+                    <span>I know this</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-container">
+            <div class="stats">
+                <div class="stats-row">
+                    <div class="stat-item">
+                        Unknown: <span class="stat-number" id="stat-unknown">30</span>
+                    </div>
+                    <div class="stat-item">
+                        Familiar: <span class="stat-number" id="stat-familiar">0</span>
+                    </div>
+                    <div class="stat-item">
+                        Know: <span class="stat-number" id="stat-know">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid" id="skillsGrid"></div>
+
+            <div class="controls">
+                <button onclick="resetAll()">Reset All</button>
+                <button onclick="saveProgress()">Save Progress</button>
+                <button onclick="loadProgress()">Load Progress</button>
+                <button onclick="exportProgress()">Export Data</button>
+            </div>
+        </div>
+
+        <footer>
+            <p>Click any skill card to cycle through: Unknown → Familiar → Know → Unknown</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Progress is automatically saved to your browser</p>
+        </footer>
+    </div>
+
+    <script>
+        // All 30 skills in order
+        const skills = [
+            "Up and down arrows to access history",
+            "Tab completion",
+            "Command line basics (ls, pwd, cd, mkdir, cat, cp)",
+            "Markdown",
+            "CSV",
+            "JSON",
+            "YML",
+            "API key",
+            "Environment variables",
+            "Hello world",
+            "Chatbot",
+            "Create a repository",
+            "Fork a repository",
+            "README file",
+            "GitHub Pages",
+            "GitHub Codespaces",
+            "GitHub Gist",
+            "HTML basics",
+            "GitHub Issues",
+            "git status",
+            "git add",
+            "git commit",
+            "git push",
+            "VS Code Source Control",
+            ".gitignore file",
+            "Python",
+            "Google Colab",
+            "Prompt engineering",
+            "Install a module (pip)",
+            "System prompt"
+        ];
+
+        // State management
+        let skillStates = new Array(skills.length).fill(0); // 0=unknown, 1=familiar, 2=know
+
+        // Initialize the grid
+        function initGrid() {
+            const grid = document.getElementById('skillsGrid');
+            grid.innerHTML = '';
+            
+            skills.forEach((skill, index) => {
+                const card = document.createElement('div');
+                card.className = 'skill-card state-unknown';
+                card.innerHTML = `<div class="skill-text">${skill}</div>`;
+                card.onclick = () => cycleState(index);
+                grid.appendChild(card);
+            });
+            
+            loadProgressAuto();
+        }
+
+        // Cycle through states: 0 → 1 → 2 → 0
+        function cycleState(index) {
+            skillStates[index] = (skillStates[index] + 1) % 3;
+            updateCard(index);
+            updateStats();
+            saveProgressAuto();
+        }
+
+        // Update individual card
+        function updateCard(index) {
+            const cards = document.querySelectorAll('.skill-card');
+            const card = cards[index];
+            const state = skillStates[index];
+            
+            card.className = 'skill-card';
+            
+            if (state === 0) {
+                card.classList.add('state-unknown');
+            } else if (state === 1) {
+                card.classList.add('state-familiar');
+            } else {
+                card.classList.add('state-know');
+            }
+        }
+
+        // Update statistics
+        function updateStats() {
+            const unknown = skillStates.filter(s => s === 0).length;
+            const familiar = skillStates.filter(s => s === 1).length;
+            const know = skillStates.filter(s => s === 2).length;
+            
+            document.getElementById('stat-unknown').textContent = unknown;
+            document.getElementById('stat-familiar').textContent = familiar;
+            document.getElementById('stat-know').textContent = know;
+        }
+
+        // Reset all to unknown
+        function resetAll() {
+            if (confirm('Reset all skills to "I don\'t know this"?')) {
+                skillStates = new Array(skills.length).fill(0);
+                initGrid();
+                updateStats();
+                saveProgressAuto();
+            }
+        }
+
+        // Auto-save to localStorage
+        function saveProgressAuto() {
+            localStorage.setItem('skillsProgress', JSON.stringify(skillStates));
+        }
+
+        // Auto-load from localStorage
+        function loadProgressAuto() {
+            const saved = localStorage.getItem('skillsProgress');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    if (parsed.length === skills.length) {
+                        skillStates = parsed;
+                        skillStates.forEach((state, index) => updateCard(index));
+                        updateStats();
+                    }
+                } catch (e) {
+                    console.error('Failed to load progress:', e);
+                }
+            }
+        }
+
+        // Manual save (shows confirmation)
+        function saveProgress() {
+            saveProgressAuto();
+            alert('Progress saved to browser storage!');
+        }
+
+        // Manual load (shows confirmation)
+        function loadProgress() {
+            loadProgressAuto();
+            alert('Progress loaded from browser storage!');
+        }
+
+        // Export as JSON
+        function exportProgress() {
+            const data = skills.map((skill, index) => {
+                const stateNames = ['Unknown', 'Familiar', 'Know'];
+                return {
+                    skill: skill,
+                    status: stateNames[skillStates[index]]
+                };
+            });
+            
+            const json = JSON.stringify(data, null, 2);
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'skills-progress.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Initialize on page load
+        window.onload = initGrid;
+    </script>
+</body>
+</html>
