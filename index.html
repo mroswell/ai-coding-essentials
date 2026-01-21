@@ -161,12 +161,12 @@
             grid-template-columns: repeat(4, 1fr);
         }
 
-        .grid-5x5 {
-            grid-template-columns: repeat(5, 1fr);
+        .grid-4x5 {
+            grid-template-columns: repeat(4, 1fr);
         }
 
-        .grid-5x4 {
-            grid-template-columns: repeat(5, 1fr);
+        .grid-4x6 {
+            grid-template-columns: repeat(4, 1fr);
         }
 
         .skill-card {
@@ -353,7 +353,7 @@
         }
 
         @media (max-width: 900px) {
-            .grid-4x4, .grid-5x5, .grid-5x4 {
+            .grid-4x4, .grid-4x5, .grid-4x6 {
                 grid-template-columns: repeat(3, 1fr);
             }
             
@@ -363,7 +363,7 @@
         }
 
         @media (max-width: 600px) {
-            .grid-4x4, .grid-5x5, .grid-5x4 {
+            .grid-4x4, .grid-4x5, .grid-4x6 {
                 grid-template-columns: repeat(2, 1fr);
             }
             
@@ -420,12 +420,12 @@
                 <div class="tracker-header">
                     <h2 class="tracker-title">AI Essentials</h2>
                     <div class="tracker-stats">
-                        <span>Unknown: <span class="stat-number" id="ai-unknown">23</span></span>
+                        <span>Unknown: <span class="stat-number" id="ai-unknown">24</span></span>
                         <span>Familiar: <span class="stat-number" id="ai-familiar">0</span></span>
                         <span>Know: <span class="stat-number" id="ai-know">0</span></span>
                     </div>
                 </div>
-                <div class="grid grid-5x5" id="ai-grid"></div>
+                <div class="grid grid-4x6" id="ai-grid"></div>
             </div>
 
             <!-- Developer Essentials -->
@@ -453,7 +453,7 @@
                         <span>Know: <span class="stat-number" id="github-know">0</span></span>
                     </div>
                 </div>
-                <div class="grid grid-5x4" id="github-grid"></div>
+                <div class="grid grid-4x5" id="github-grid"></div>
             </div>
         </div>
 
@@ -504,7 +504,7 @@
             { name: "Encrypted Secret", category: "Miscellaneous" }
         ];
 
-        // AI Skills (23 items)
+        // AI Skills (24 items)
         const aiSkills = [
             { name: "Chatbot", category: "AI Tools and Platforms" },
             { name: "ChatGPT", category: "AI Tools and Platforms" },
@@ -526,6 +526,7 @@
             { name: "Sequential Prompting", category: "Prompting Techniques" },
             { name: "Classification", category: "AI Tasks" },
             { name: "Entity Tagging", category: "AI Tasks" },
+            { name: "Code Explanation", category: "AI Tasks" },
             { name: "Hallucinations", category: "AI Concepts" },
             { name: "Usage and Length Limits", category: "AI Concepts" },
             { name: "Human-in-the-Loop Design", category: "AI Concepts" }
