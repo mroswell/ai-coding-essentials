@@ -52,6 +52,7 @@
             font-size: 1.1em;
             margin-bottom: 10px;
             color: #333;
+            text-align: center;
         }
 
         .legend-items {
@@ -454,6 +455,7 @@
 
         <!-- Progress Report -->
         <div class="report-section" id="report-section">
+            <div style="text-align: center; font-size: 0.9em; color: #666; margin-bottom: 5px;">AI Coding Essentials</div>
             <h2>Progress Report</h2>
             <div class="report-grid" id="report-grid"></div>
             <div style="text-align: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd;">
@@ -476,64 +478,65 @@
     <script>
         // Skill data with categories
         const githubSkills = [
-            { name: "Collaborators", category: "Collaboration and Community" },
-            { name: "Star a Repository", category: "Collaboration and Community" },
-            { name: "GitHub.dev", category: "Development Environment" },
-            { name: "GitHub Codespaces", category: "Development Environment" },
-            { name: "README file", category: "Documentation" },
-            { name: "GitHub Wiki", category: "Documentation" },
-            { name: "GitHub Actions", category: "GitHub Features" },
-            { name: "GitHub Gist", category: "GitHub Features" },
-            { name: "GitHub Issues", category: "GitHub Features" },
-            { name: "GitHub Pages", category: "GitHub Features" },
-            { name: "Monitor Deployment", category: "GitHub Features" },
-            { name: "Create a repository", category: "Repository Management" },
-            { name: "Fork a repository", category: "Repository Management" },
-            { name: "Encrypted Secret", category: "Security" },
+            { name: "Create a repository", category: "Repository Basics" },
+            { name: "Fork a repository", category: "Repository Basics" },
+            { name: "Collaborators", category: "Repository Basics" },
+            { name: "Star a Repository", category: "Repository Basics" },
             { name: ".gitignore file", category: "Version Control" },
             { name: "git add", category: "Version Control" },
             { name: "git commit", category: "Version Control" },
             { name: "git push", category: "Version Control" },
             { name: "git status", category: "Version Control" },
-            { name: "View Commit History", category: "Version Control" }
+            { name: "View Commit History", category: "Version Control" },
+            { name: "GitHub Actions", category: "GitHub Features" },
+            { name: "GitHub Issues", category: "GitHub Features" },
+            { name: "GitHub Pages", category: "GitHub Features" },
+            { name: "GitHub Codespaces", category: "GitHub Features" },
+            { name: "GitHub.dev", category: "GitHub Features" },
+            { name: "GitHub Gist", category: "GitHub Features" },
+            { name: "GitHub Wiki", category: "GitHub Features" },
+            { name: "README file", category: "Miscellaneous" },
+            { name: "Monitor Deployment", category: "Miscellaneous" },
+            { name: "Encrypted Secret", category: "Miscellaneous" }
         ];
 
         const aiSkills = [
-            { name: "Hallucinations", category: "AI Concepts" },
-            { name: "Usage and Length Limits", category: "AI Concepts" },
+            { name: "Chatbot", category: "AI Tools and Platforms" },
+            { name: "ChatGPT", category: "AI Tools and Platforms" },
+            { name: "Claude", category: "AI Tools and Platforms" },
+            { name: "Google AI Studio", category: "AI Tools and Platforms" },
+            { name: "Google NotebookLM", category: "AI Tools and Platforms" },
+            { name: "Google Colab", category: "AI Tools and Platforms" },
+            { name: "My Chat Search", category: "AI Tools and Platforms" },
+            { name: "API key", category: "AI Features" },
             { name: "Artifact", category: "AI Features" },
             { name: "Projects", category: "AI Features" },
-            { name: "Search Past Conversations", category: "AI Features" },
-            { name: "Chatbot", category: "AI Tools" },
-            { name: "ChatGPT", category: "AI Tools" },
-            { name: "Claude", category: "AI Tools" },
-            { name: "Google AI Studio", category: "AI Tools" },
-            { name: "Google NotebookLM", category: "AI Tools" },
-            { name: "API key", category: "Authentication" },
-            { name: "Google Colab", category: "Development Platform" },
+            { name: "Export conversations", category: "AI Features" },
             { name: "Classification", category: "Prompting Techniques" },
             { name: "Prompt engineering", category: "Prompting Techniques" },
             { name: "Reverse engineering prompts", category: "Prompting Techniques" },
-            { name: "Vision Prompts", category: "Prompting Techniques" }
+            { name: "Vision Prompts", category: "Prompting Techniques" },
+            { name: "Hallucinations", category: "AI Concepts" },
+            { name: "Usage and Length Limits", category: "AI Concepts" }
         ];
 
         const devSkills = [
-            { name: "Command line basics (ls, pwd, cd, mkdir, cat, cp)", category: "Command Line" },
-            { name: "Tab completion", category: "Command Line" },
-            { name: "Up and down arrows to access history", category: "Command Line" },
-            { name: "Environment variables", category: "Configuration" },
-            { name: "Dev Console", category: "Development Tools" },
-            { name: "Terminal", category: "Development Tools" },
-            { name: "VS Code", category: "Development Tools" },
-            { name: "CSV", category: "File Formats" },
-            { name: "HTML", category: "File Formats" },
-            { name: "JSON", category: "File Formats" },
-            { name: "Markdown", category: "File Formats" },
-            { name: "YML", category: "File Formats" },
-            { name: "Install a module (pip)", category: "Package Management" },
-            { name: "Comments", category: "Programming Basics" },
-            { name: "Hello world", category: "Programming Basics" },
-            { name: "Python", category: "Programming Languages" }
+            { name: "Command line basics (ls, pwd, cd, mkdir, cat, cp)", category: "Command Line and Terminal" },
+            { name: "Tab completion", category: "Command Line and Terminal" },
+            { name: "Up and down arrows to access history", category: "Command Line and Terminal" },
+            { name: "Terminal", category: "Command Line and Terminal" },
+            { name: "Dev Console", category: "Command Line and Terminal" },
+            { name: "Environment variables", category: "Command Line and Terminal" },
+            { name: "CSV", category: "File Formats and Languages" },
+            { name: "HTML", category: "File Formats and Languages" },
+            { name: "JSON", category: "File Formats and Languages" },
+            { name: "Markdown", category: "File Formats and Languages" },
+            { name: "Python", category: "File Formats and Languages" },
+            { name: "YML", category: "File Formats and Languages" },
+            { name: "VS Code", category: "Programming Fundamentals" },
+            { name: "Hello world", category: "Programming Fundamentals" },
+            { name: "Comments", category: "Programming Fundamentals" },
+            { name: "Install a module (pip)", category: "Programming Fundamentals" }
         ];
 
         // State arrays (0=unknown, 1=familiar, 2=know)
@@ -787,11 +790,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Fundamentals Progress Report</title>
+    <title>AI Coding Essentials - Progress Report</title>
     <style>
         @page {
             size: letter;
-            margin: 0.5in;
+            margin: 0.75in;
         }
         body {
             font-family: Arial, sans-serif;
@@ -799,11 +802,18 @@
             margin: 0;
             padding: 20px;
         }
+        .course-name {
+            text-align: center;
+            color: #666;
+            font-size: 11pt;
+            margin-bottom: 5px;
+        }
         h1 {
             text-align: center;
             color: #1d3557;
             font-size: 18pt;
             margin-bottom: 10px;
+            margin-top: 0;
         }
         .date {
             text-align: center;
@@ -860,7 +870,8 @@
     </style>
 </head>
 <body>
-    <h1>Fundamentals Progress Report</h1>
+    <div class="course-name">AI Coding Essentials</div>
+    <h1>Progress Report</h1>
     <div class="date">Generated: ${new Date().toLocaleString()}</div>
     <div class="report-grid">
 `;
@@ -917,6 +928,9 @@
             printWindow.document.write(html);
             printWindow.document.close();
             
+            // Set the document title for PDF filename suggestion
+            printWindow.document.title = 'ai-class-progress';
+            
             // Wait for content to load, then trigger print dialog
             setTimeout(() => {
                 printWindow.print();
@@ -968,7 +982,7 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `fundamentals-progress-${new Date().toISOString().split('T')[0]}.json`;
+            a.download = `ai-class-progress.json`;
             a.click();
             URL.revokeObjectURL(url);
         }
