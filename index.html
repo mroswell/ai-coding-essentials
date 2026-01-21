@@ -161,6 +161,10 @@
             grid-template-columns: repeat(4, 1fr);
         }
 
+        .grid-5x5 {
+            grid-template-columns: repeat(5, 1fr);
+        }
+
         .grid-5x4 {
             grid-template-columns: repeat(5, 1fr);
         }
@@ -349,7 +353,7 @@
         }
 
         @media (max-width: 900px) {
-            .grid-4x4, .grid-5x4 {
+            .grid-4x4, .grid-5x5, .grid-5x4 {
                 grid-template-columns: repeat(3, 1fr);
             }
             
@@ -359,7 +363,7 @@
         }
 
         @media (max-width: 600px) {
-            .grid-4x4, .grid-5x4 {
+            .grid-4x4, .grid-5x5, .grid-5x4 {
                 grid-template-columns: repeat(2, 1fr);
             }
             
