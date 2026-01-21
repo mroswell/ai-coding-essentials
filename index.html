@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fundamentals Progress Tracker</title>
+    <title>AI Coding Essentials Progress Tracker</title>
     <style>
         * {
             margin: 0;
@@ -416,12 +416,12 @@
                 <div class="tracker-header">
                     <h2 class="tracker-title">AI Essentials</h2>
                     <div class="tracker-stats">
-                        <span>Unknown: <span class="stat-number" id="ai-unknown">16</span></span>
+                        <span>Unknown: <span class="stat-number" id="ai-unknown">23</span></span>
                         <span>Familiar: <span class="stat-number" id="ai-familiar">0</span></span>
                         <span>Know: <span class="stat-number" id="ai-know">0</span></span>
                     </div>
                 </div>
-                <div class="grid grid-4x4" id="ai-grid"></div>
+                <div class="grid grid-5x5" id="ai-grid"></div>
             </div>
 
             <!-- Developer Essentials -->
@@ -476,7 +476,7 @@
     </div>
 
     <script>
-        // Skill data with categories
+        // GitHub Skills (20 items)
         const githubSkills = [
             { name: "Create a repository", category: "Repository Basics" },
             { name: "Fork a repository", category: "Repository Basics" },
@@ -500,6 +500,7 @@
             { name: "Encrypted Secret", category: "Miscellaneous" }
         ];
 
+        // AI Skills (23 items)
         const aiSkills = [
             { name: "Chatbot", category: "AI Tools and Platforms" },
             { name: "ChatGPT", category: "AI Tools and Platforms" },
@@ -508,29 +509,25 @@
             { name: "Google NotebookLM", category: "AI Tools and Platforms" },
             { name: "Google Colab", category: "AI Tools and Platforms" },
             { name: "My Chat Search", category: "AI Tools and Platforms" },
-
             { name: "API key", category: "AI Features" },
             { name: "Artifact", category: "AI Features" },
             { name: "Projects", category: "AI Features" },
-            { name: "Export Conversations", category: "AI Features"},
-            { name: "Few-Shot Prompting", category: "Prompting Techniques"},
-        
+            { name: "Export Conversations", category: "AI Features" },
+            { name: "Few-Shot Prompting", category: "Prompting Techniques" },
             { name: "Prompt engineering", category: "Prompting Techniques" },
             { name: "Reverse engineering prompts", category: "Prompting Techniques" },
             { name: "Vision Prompts", category: "Prompting Techniques" },
             { name: "Structured Output Prompting", category: "Prompting Techniques" },
             { name: "Self-Checking Prompts", category: "Prompting Techniques" },
             { name: "Sequential Prompting", category: "Prompting Techniques" },
-
             { name: "Classification", category: "AI Tasks" },
             { name: "Entity Tagging", category: "AI Tasks" },
-
             { name: "Hallucinations", category: "AI Concepts" },
             { name: "Usage and Length Limits", category: "AI Concepts" },
             { name: "Human-in-the-Loop Design", category: "AI Concepts" }
-]
+        ];
 
-
+        // Developer Skills (16 items)
         const devSkills = [
             { name: "Command line basics (ls, pwd, cd, mkdir, cat, cp)", category: "Command Line and Terminal" },
             { name: "Tab completion", category: "Command Line and Terminal" },
@@ -738,61 +735,8 @@
             }
         }
 
-        // Export as TXT
-        function exportAsTxt() {
-            const stateNames = ['UNKNOWN', 'FAMILIAR', 'I UNDERSTAND'];
-            let txt = 'FUNDAMENTALS PROGRESS REPORT\n';
-            txt += `Generated: ${new Date().toLocaleString()}\n`;
-            txt += '='.repeat(60) + '\n\n';
-            
-            const trackers = [
-                { name: 'AI', skills: aiSkills, states: aiStates },
-                { name: 'DEVELOPER', skills: devSkills, states: devStates },
-                { name: 'GITHUB', skills: githubSkills, states: githubStates }
-            ];
-            
-            for (let state = 0; state < 3; state++) {
-                txt += `${stateNames[state]}\n`;
-                txt += '-'.repeat(60) + '\n\n';
-                
-                trackers.forEach(tracker => {
-                    const categorizedSkills = {};
-                    tracker.skills.forEach((skill, index) => {
-                        if (tracker.states[index] === state) {
-                            if (!categorizedSkills[skill.category]) {
-                                categorizedSkills[skill.category] = [];
-                            }
-                            categorizedSkills[skill.category].push(skill.name);
-                        }
-                    });
-                    
-                    if (Object.keys(categorizedSkills).length > 0) {
-                        txt += `${tracker.name}\n`;
-                        Object.keys(categorizedSkills).sort().forEach(category => {
-                            txt += `  ${category}\n`;
-                            categorizedSkills[category].forEach(skillName => {
-                                txt += `    • ${skillName}\n`;
-                            });
-                        });
-                        txt += '\n';
-                    }
-                });
-                
-                txt += '\n';
-            }
-            
-            const blob = new Blob([txt], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `fundamentals-progress-${new Date().toISOString().split('T')[0]}.txt`;
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-
         // Export as PDF (three-column layout)
         function exportAsPdf() {
-            // Create a new window with the report content
             const printWindow = window.open('', '_blank');
             const stateNames = ['Unknown', 'Familiar', 'I Understand'];
             
@@ -803,81 +747,20 @@
     <meta charset="UTF-8">
     <title>AI Coding Essentials - Progress Report</title>
     <style>
-        @page {
-            size: letter;
-            margin: 0.75in;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            font-size: 10pt;
-            margin: 0;
-            padding: 20px;
-        }
-        .course-name {
-            text-align: center;
-            color: #666;
-            font-size: 11pt;
-            margin-bottom: 5px;
-        }
-        h1 {
-            text-align: center;
-            color: #1d3557;
-            font-size: 18pt;
-            margin-bottom: 10px;
-            margin-top: 0;
-        }
-        .date {
-            text-align: center;
-            color: #666;
-            font-size: 9pt;
-            margin-bottom: 20px;
-        }
-        .report-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-        .report-column {
-            border-left: 3px solid #457b9d;
-            padding-left: 10px;
-        }
-        .report-column h2 {
-            color: #1d3557;
-            font-size: 14pt;
-            margin-bottom: 12px;
-            margin-top: 0;
-        }
-        .report-tracker {
-            margin-bottom: 15px;
-            page-break-inside: avoid;
-        }
-        .report-tracker-name {
-            font-weight: bold;
-            color: #457b9d;
-            font-size: 11pt;
-            margin-bottom: 5px;
-        }
-        .report-category {
-            margin-left: 10px;
-            margin-bottom: 8px;
-        }
-        .report-category-name {
-            font-weight: 600;
-            color: #1d3557;
-            font-size: 10pt;
-            margin-bottom: 3px;
-        }
-        .report-skills {
-            margin-left: 8px;
-            color: #333;
-            font-size: 9pt;
-            line-height: 1.4;
-        }
-        @media print {
-            body {
-                padding: 0;
-            }
-        }
+        @page { size: letter; margin: 0.75in; }
+        body { font-family: Arial, sans-serif; font-size: 10pt; margin: 0; padding: 20px; }
+        .course-name { text-align: center; color: #666; font-size: 11pt; margin-bottom: 5px; }
+        h1 { text-align: center; color: #1d3557; font-size: 18pt; margin-bottom: 10px; margin-top: 0; }
+        .date { text-align: center; color: #666; font-size: 9pt; margin-bottom: 20px; }
+        .report-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .report-column { border-left: 3px solid #457b9d; padding-left: 10px; }
+        .report-column h2 { color: #1d3557; font-size: 14pt; margin-bottom: 12px; margin-top: 0; }
+        .report-tracker { margin-bottom: 15px; page-break-inside: avoid; }
+        .report-tracker-name { font-weight: bold; color: #457b9d; font-size: 11pt; margin-bottom: 5px; }
+        .report-category { margin-left: 10px; margin-bottom: 8px; }
+        .report-category-name { font-weight: 600; color: #1d3557; font-size: 10pt; margin-bottom: 3px; }
+        .report-skills { margin-left: 8px; color: #333; font-size: 9pt; line-height: 1.4; }
+        @media print { body { padding: 0; } }
     </style>
 </head>
 <body>
@@ -893,10 +776,8 @@
                 { name: 'GitHub', skills: githubSkills, states: githubStates }
             ];
             
-            // Three columns: Unknown, Familiar, I Understand
             for (let state = 0; state < 3; state++) {
-                html += `<div class="report-column">`;
-                html += `<h2>${stateNames[state]}</h2>`;
+                html += `<div class="report-column"><h2>${stateNames[state]}</h2>`;
                 
                 trackers.forEach(tracker => {
                     const categorizedSkills = {};
@@ -910,19 +791,14 @@
                     });
                     
                     if (Object.keys(categorizedSkills).length > 0) {
-                        html += `<div class="report-tracker">`;
-                        html += `<div class="report-tracker-name">${tracker.name}</div>`;
-                        
+                        html += `<div class="report-tracker"><div class="report-tracker-name">${tracker.name}</div>`;
                         Object.keys(categorizedSkills).sort().forEach(category => {
-                            html += `<div class="report-category">`;
-                            html += `<div class="report-category-name">${category}</div>`;
-                            html += `<div class="report-skills">`;
+                            html += `<div class="report-category"><div class="report-category-name">${category}</div><div class="report-skills">`;
                             categorizedSkills[category].forEach(skillName => {
                                 html += `• ${skillName}<br>`;
                             });
                             html += `</div></div>`;
                         });
-                        
                         html += `</div>`;
                     }
                 });
@@ -930,22 +806,12 @@
                 html += `</div>`;
             }
             
-            html += `
-    </div>
-</body>
-</html>
-`;
+            html += `</div></body></html>`;
             
             printWindow.document.write(html);
             printWindow.document.close();
-            
-            // Set the document title for PDF filename suggestion
             printWindow.document.title = 'ai-class-progress';
-            
-            // Wait for content to load, then trigger print dialog
-            setTimeout(() => {
-                printWindow.print();
-            }, 250);
+            setTimeout(() => { printWindow.print(); }, 250);
         }
 
         // Export as JSON
@@ -1025,20 +891,28 @@
             }
         }
 
-        // Reset all trackers
+        // Reset all trackers - FIXED VERSION
         function resetAll() {
             if (confirm('Reset ALL trackers to "I don\'t know this"? This cannot be undone.')) {
+                // Reset all state arrays
                 githubStates = new Array(githubSkills.length).fill(0);
                 aiStates = new Array(aiSkills.length).fill(0);
                 devStates = new Array(devSkills.length).fill(0);
                 
-                initGrids();
+                // Save immediately to localStorage
+                saveAllProgress();
                 
+                // Update all cards visually
+                githubStates.forEach((state, index) => updateCard('github', index, state));
+                aiStates.forEach((state, index) => updateCard('ai', index, state));
+                devStates.forEach((state, index) => updateCard('dev', index, state));
+                
+                // Update statistics
                 updateStats('github', githubStates);
                 updateStats('ai', aiStates);
                 updateStats('dev', devStates);
                 
-                saveAllProgress();
+                // Update report
                 updateReport();
             }
         }
