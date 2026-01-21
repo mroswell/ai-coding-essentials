@@ -871,29 +871,21 @@
 
         // Reset single tracker
         function resetTracker(tracker) {
-            const trackerNames = {
-                'ai': 'AI Essentials',
-                'dev': 'Developer Essentials',
-                'github': 'GitHub Essentials'
-            };
-            
-            if (confirm(`Reset ${trackerNames[tracker]} to "I don't know this"?`)) {
-                if (tracker === 'ai') {
-                    aiStates = new Array(aiSkills.length).fill(0);
-                    aiStates.forEach((state, index) => updateCard('ai', index, state));
-                    updateStats('ai', aiStates);
-                } else if (tracker === 'dev') {
-                    devStates = new Array(devSkills.length).fill(0);
-                    devStates.forEach((state, index) => updateCard('dev', index, state));
-                    updateStats('dev', devStates);
-                } else if (tracker === 'github') {
-                    githubStates = new Array(githubSkills.length).fill(0);
-                    githubStates.forEach((state, index) => updateCard('github', index, state));
-                    updateStats('github', githubStates);
-                }
-                saveAllProgress();
-                updateReport();
+            if (tracker === 'ai') {
+                aiStates = new Array(aiSkills.length).fill(0);
+                aiStates.forEach((state, index) => updateCard('ai', index, state));
+                updateStats('ai', aiStates);
+            } else if (tracker === 'dev') {
+                devStates = new Array(devSkills.length).fill(0);
+                devStates.forEach((state, index) => updateCard('dev', index, state));
+                updateStats('dev', devStates);
+            } else if (tracker === 'github') {
+                githubStates = new Array(githubSkills.length).fill(0);
+                githubStates.forEach((state, index) => updateCard('github', index, state));
+                updateStats('github', githubStates);
             }
+            saveAllProgress();
+            updateReport();
         }
 
         // Reset all trackers - FIXED VERSION
