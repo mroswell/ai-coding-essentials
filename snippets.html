@@ -154,7 +154,7 @@
     <div class="container">
         <header>
             <h1>📚 AI Coding Essentials</h1>
-            <p class="subtitle">Code Snippets & Quick References</p>
+            <p class="subtitle">Code Snippets</p>
         </header>
 
         <div class="snippet-card">
@@ -180,7 +180,7 @@ print(f"First 10 chars: {os.environ.get('ANTHROPIC_API_KEY', '')[:10]}")</code><
 
         <div class="snippet-card">
             <div class="snippet-header">
-                <div class="snippet-title">Fetch Data with JavaScript (Async/Await)</div>
+                <div class="snippet-title">YouTube Transcript</div>
                 <button class="copy-btn" onclick="copyCode(this, 'snippet2')">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                         <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path>
@@ -190,22 +190,34 @@ print(f"First 10 chars: {os.environ.get('ANTHROPIC_API_KEY', '')[:10]}")</code><
                 </button>
             </div>
             <div class="snippet-content">
-                <pre><code id="snippet2" class="language-javascript">async function fetchData(url) {
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        return null;
-    }
+                <pre><code id="snippet2" class="language-javascript">javascript: (function() {
+  function extractTranscript() {
+    const segments = document.querySelectorAll('ytd-transcript-segment-renderer');
+    let transcript = '';
+    segments.forEach(segment => {
+      const timestamp = segment.querySelector('.segment-timestamp').textContent.trim();
+      const text = segment.querySelector('.segment-text').textContent.trim();
+      transcript += `${timestamp}: ${text}\n`;
+    });
+    return transcript;
+  }
+
+  function copyToClipboard(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+  }
+  const transcript = extractTranscript();
+  copyToClipboard(transcript);
+  alert('Transcript copied to clipboard!');
+})();
 }</code></pre>
             </div>
             <div class="description">
-                A modern JavaScript function using async/await to fetch data from an API. Includes error handling for network issues and non-OK responses.
+                1. Visit YouTube Page. 2. View Full Description. 3. Open Transcript. 4. Click this Bookmark
             </div>
         </div>
 
