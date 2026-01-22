@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Coding Essentials - Progress Tracker</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.4em;
+            margin-bottom: 2px;
+        }
+
+        .subtitle {
+            font-size: 0.85em;
+            opacity: 0.9;
+        }
+
+        .controls {
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .reset-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .reset-btn:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+        }
+
+        .pdf-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .pdf-btn:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+        }
+
+        .json-btn {
+            background: #007bff;
+            color: white;
+        }
+
+        .json-btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+        }
+
+        .progress-summary {
+            margin-left: auto;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            font-weight: 600;
+            font-size: 0.8em;
+        }
+
+        .progress-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .breakdown-section {
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .breakdown-title {
+            font-size: 0.85em;
+            font-weight: 700;
+            color: #495057;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .breakdown-card {
+            background: white;
+            border-radius: 4px;
+            padding: 8px 10px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            border-top: 2px solid;
+        }
+
+        .breakdown-card:nth-child(1) {
+            border-top-color: #667eea;
+        }
+
+        .breakdown-card:nth-child(2) {
+            border-top-color: #764ba2;
+        }
+
+        .breakdown-card:nth-child(3) {
+            border-top-color: #f093fb;
+        }
+
+        .breakdown-card-title {
+            font-size: 0.8em;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #212529;
+        }
+
+        .breakdown-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .breakdown-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75em;
+        }
+
+        .breakdown-label {
+            font-weight: 600;
+            color: #6c757d;
+        }
+
+        .breakdown-value {
+            font-weight: 700;
+        }
+
+        .breakdown-bar {
+            height: 2px;
+            background: #e9ecef;
+            border-radius: 1px;
+            overflow: hidden;
+            margin-top: 1px;
+            margin-bottom: 2px;
+        }
+
+        .breakdown-bar-fill {
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .breakdown-bar-fill.unknown {
+            background: #6c757d;
+        }
+
+        .breakdown-bar-fill.familiar {
+            background: #ffc107;
+        }
+
+        .breakdown-bar-fill.understand {
+            background: #28a745;
+        }
+
+        .columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .column {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 15px;
+            min-height: 400px;
+        }
+
+        .column-header {
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid;
+        }
+
+        .column:nth-child(1) .column-header {
+            color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .column:nth-child(2) .column-header {
+            color: #ffc107;
+            border-color: #ffc107;
+        }
+
+        .column:nth-child(3) .column-header {
+            color: #28a745;
+            border-color: #28a745;
+        }
+
+        .section {
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 0.8em;
+            font-weight: 700;
+            color: #495057;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .category-group {
+            margin-bottom: 10px;
+        }
+
+        .category-title {
+            font-size: 0.75em;
+            font-weight: 600;
+            color: #6c757d;
+            margin-top: 8px;
+            margin-bottom: 4px;
+        }
+
+        .skill-item {
+            background: white;
+            padding: 6px 10px 6px 14px;
+            margin-bottom: 4px;
+            border-radius: 4px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+            transition: box-shadow 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .skill-item:hover {
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+        }
+
+        .skill-name {
+            font-size: 0.85em;
+            color: #212529;
+            flex: 1;
+        }
+
+        .skill-controls {
+            display: flex;
+            gap: 3px;
+        }
+
+        .arrow-btn {
+            background: none;
+            border: none;
+            font-size: 1em;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 3px;
+            transition: background 0.2s ease;
+            color: #6c757d;
+        }
+
+        .arrow-btn:hover {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .arrow-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .column:nth-child(1) .skill-item {
+            border-left: 3px solid #c0c5ca;
+            cursor: pointer;
+        }
+
+        .column:nth-child(2) .skill-item {
+            border-left: 3px solid #fde68a;
+        }
+
+        .column:nth-child(3) .skill-item {
+            border-left: 3px solid #86efac;
+        }
+
+        @media (max-width: 1024px) {
+            .columns {
+                grid-template-columns: 1fr;
+            }
+
+            .progress-summary {
+                margin-left: 0;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .controls {
+                display: none;
+            }
+
+            .arrow-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="tracker">
+        <header>
+            <h1>🎓 AI Coding Essentials</h1>
+            <p class="subtitle">Progress Tracker</p>
+        </header>
+
+        <div class="controls">
+            <button class="reset-btn" onclick="resetProgress()">🔄 Reset All Progress</button>
+            <button class="pdf-btn" onclick="exportToPDF()">📄 Save as PDF</button>
+            <button class="json-btn" onclick="exportToJSON()">💾 Export JSON</button>
+            <div class="progress-summary">
+                <div class="progress-item">
+                    <span class="progress-dot" style="background: #6c757d;"></span>
+                    <span id="unknown-count">0</span> Unknown
+                </div>
+                <div class="progress-item">
+                    <span class="progress-dot" style="background: #ffc107;"></span>
+                    <span id="familiar-count">0</span> Familiar
+                </div>
+                <div class="progress-item">
+                    <span class="progress-dot" style="background: #28a745;"></span>
+                    <span id="understand-count">0</span> Understand
+                </div>
+            </div>
+        </div>
+
+        <div class="breakdown-section">
+            <div class="breakdown-title">📊 Progress by Category</div>
+            <div class="breakdown-grid">
+                <div class="breakdown-card">
+                    <div class="breakdown-card-title">🤖 AI Essentials</div>
+                    <div class="breakdown-stats" id="ai-breakdown"></div>
+                </div>
+                <div class="breakdown-card">
+                    <div class="breakdown-card-title">💻 Developer Essentials</div>
+                    <div class="breakdown-stats" id="developer-breakdown"></div>
+                </div>
+                <div class="breakdown-card">
+                    <div class="breakdown-card-title">🐙 GitHub Essentials</div>
+                    <div class="breakdown-stats" id="github-breakdown"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="column" id="unknown-column">
+                <div class="column-header">⚫ Unknown</div>
+            </div>
+            <div class="column" id="familiar-column">
+                <div class="column-header">📚 Familiar</div>
+            </div>
+            <div class="column" id="understand-column">
+                <div class="column-header">✅ I Understand This</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const skillsData = {
+  "exportDate": "2026-01-22T05:54:06.454Z",
+  "ai": [
+    {"skill": "Chatbot", "category": "AI Tools and Platforms", "status": "Unknown"},
+    {"skill": "ChatGPT", "category": "AI Tools and Platforms", "status": "Unknown"},
+    {"skill": "Claude", "category": "AI Tools and Platforms", "status": "Unknown"},
+    {"skill": "Google AI Studio", "category": "AI Tools and Platforms", "status": "Unknown"},
+    {"skill": "Google NotebookLM", "category": "AI Tools and Platforms", "status": "Unknown"},
+    {"skill": "Google Colab", "category": "AI Tools and Platforms", "status": "Unknown"},
+    {"skill": "My Chat Search", "category": "AI Tools and Platforms", "status": "Unknown"},
+    {"skill": "API key", "category": "AI Features", "status": "Unknown"},
+    {"skill": "Artifact", "category": "AI Features", "status": "Unknown"},
+    {"skill": "Projects", "category": "AI Features", "status": "Unknown"},
+    {"skill": "Export Conversations", "category": "AI Features", "status": "Unknown"},
+    {"skill": "Few-Shot Prompting", "category": "Prompting Techniques", "status": "Unknown"},
+    {"skill": "Prompt engineering", "category": "Prompting Techniques", "status": "Unknown"},
+    {"skill": "Reverse engineering prompts", "category": "Prompting Techniques", "status": "Unknown"},
+    {"skill": "Vision Prompts", "category": "Prompting Techniques", "status": "Unknown"},
+    {"skill": "Structured Output Prompting", "category": "Prompting Techniques", "status": "Unknown"},
+    {"skill": "Self-Checking Prompts", "category": "Prompting Techniques", "status": "Unknown"},
+    {"skill": "Sequential Prompting", "category": "Prompting Techniques", "status": "Unknown"},
+    {"skill": "Classification", "category": "AI Tasks", "status": "Unknown"},
+    {"skill": "Entity Tagging", "category": "AI Tasks", "status": "Unknown"},
+    {"skill": "Code Explanation", "category": "AI Tasks", "status": "Unknown"},
+    {"skill": "Hallucinations", "category": "AI Concepts", "status": "Unknown"},
+    {"skill": "Usage and Length Limits", "category": "AI Concepts", "status": "Unknown"},
+    {"skill": "Human-in-the-Loop Design", "category": "AI Concepts", "status": "Unknown"}
+  ],
+  "developer": [
+    {"skill": "Command line basics (ls, pwd, cd, mkdir, cat, cp)", "category": "Command Line and Terminal", "status": "Unknown"},
+    {"skill": "Tab completion", "category": "Command Line and Terminal", "status": "Unknown"},
+    {"skill": "Up and down arrows to access history", "category": "Command Line and Terminal", "status": "Unknown"},
+    {"skill": "Terminal", "category": "Command Line and Terminal", "status": "Unknown"},
+    {"skill": "Dev Console", "category": "Command Line and Terminal", "status": "Unknown"},
+    {"skill": "Environment variables", "category": "Command Line and Terminal", "status": "Unknown"},
+    {"skill": "CSV", "category": "File Formats and Languages", "status": "Unknown"},
+    {"skill": "HTML", "category": "File Formats and Languages", "status": "Unknown"},
+    {"skill": "JSON", "category": "File Formats and Languages", "status": "Unknown"},
+    {"skill": "Markdown", "category": "File Formats and Languages", "status": "Unknown"},
+    {"skill": "Python", "category": "File Formats and Languages", "status": "Unknown"},
+    {"skill": "YML", "category": "File Formats and Languages", "status": "Unknown"},
+    {"skill": "VS Code", "category": "Programming Fundamentals", "status": "Unknown"},
+    {"skill": "Hello world", "category": "Programming Fundamentals", "status": "Unknown"},
+    {"skill": "Comments", "category": "Programming Fundamentals", "status": "Unknown"},
+    {"skill": "Install a module (pip)", "category": "Programming Fundamentals", "status": "Unknown"}
+  ],
+  "github": [
+    {"skill": "Create a repository", "category": "Repository Basics", "status": "Unknown"},
+    {"skill": "Fork a repository", "category": "Repository Basics", "status": "Unknown"},
+    {"skill": "Collaborators", "category": "Repository Basics", "status": "Unknown"},
+    {"skill": "Star a Repository", "category": "Repository Basics", "status": "Unknown"},
+    {"skill": ".gitignore file", "category": "Version Control", "status": "Unknown"},
+    {"skill": "git add", "category": "Version Control", "status": "Unknown"},
+    {"skill": "git commit", "category": "Version Control", "status": "Unknown"},
+    {"skill": "git push", "category": "Version Control", "status": "Unknown"},
+    {"skill": "git status", "category": "Version Control", "status": "Unknown"},
+    {"skill": "View Commit History", "category": "Version Control", "status": "Unknown"},
+    {"skill": "GitHub Actions", "category": "GitHub Features", "status": "Unknown"},
+    {"skill": "GitHub Issues", "category": "GitHub Features", "status": "Unknown"},
+    {"skill": "GitHub Pages", "category": "GitHub Features", "status": "Unknown"},
+    {"skill": "GitHub Codespaces", "category": "GitHub Features", "status": "Unknown"},
+    {"skill": "GitHub.dev", "category": "GitHub Features", "status": "Unknown"},
+    {"skill": "GitHub Gist", "category": "GitHub Features", "status": "Unknown"},
+    {"skill": "GitHub Wiki", "category": "GitHub Features", "status": "Unknown"},
+    {"skill": "README file", "category": "Miscellaneous", "status": "Unknown"},
+    {"skill": "Monitor Deployment", "category": "Miscellaneous", "status": "Unknown"},
+    {"skill": "Encrypted Secret", "category": "Miscellaneous", "status": "Unknown"}
+  ]
+};
+
+        // Load saved progress from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem('aiSkillsProgress');
+            if (saved) {
+                const savedData = JSON.parse(saved);
+                // Update skillsData with saved statuses
+                for (let section in skillsData) {
+                    if (section === 'exportDate' || section === 'summary') continue;
+                    if (!Array.isArray(skillsData[section])) continue;
+                    if (savedData[section] && Array.isArray(savedData[section])) {
+                        skillsData[section].forEach((skill, index) => {
+                            if (savedData[section][index]) {
+                                skill.status = savedData[section][index].status;
+                            }
+                        });
+                    }
+                }
+            }
+        }
+
+        // Save progress to localStorage
+        function saveProgress() {
+            localStorage.setItem('aiSkillsProgress', JSON.stringify(skillsData));
+        }
+
+        // Organize skills by section and category
+        function organizeSkills(status) {
+            const organized = {};
+            
+            for (let section in skillsData) {
+                if (section === 'exportDate' || section === 'summary') continue;
+                if (!Array.isArray(skillsData[section])) continue;
+                
+                organized[section] = {};
+                
+                skillsData[section].forEach(skill => {
+                    if (skill.status === status) {
+                        if (!organized[section][skill.category]) {
+                            organized[section][skill.category] = [];
+                        }
+                        organized[section][skill.category].push(skill);
+                    }
+                });
+            }
+            
+            return organized;
+        }
+
+        // Render all columns
+        function renderColumns() {
+            renderColumn('unknown-column', 'Unknown', organizeSkills('Unknown'));
+            renderColumn('familiar-column', 'Familiar', organizeSkills('Familiar'));
+            renderColumn('understand-column', 'I Understand This', organizeSkills('I Understand This'));
+            updateCounts();
+            updateBreakdown();
+        }
+
+        // Render a single column
+        function renderColumn(columnId, status, organized) {
+            const column = document.getElementById(columnId);
+            const header = column.querySelector('.column-header');
+            column.innerHTML = '';
+            column.appendChild(header);
+
+            const sectionTitles = {
+                'ai': 'AI Essentials',
+                'developer': 'Developer Essentials',
+                'github': 'GitHub Essentials'
+            };
+
+            for (let section in organized) {
+                if (Object.keys(organized[section]).length === 0) continue;
+
+                const sectionDiv = document.createElement('div');
+                sectionDiv.className = 'section';
+                
+                const sectionTitle = document.createElement('div');
+                sectionTitle.className = 'section-title';
+                sectionTitle.textContent = sectionTitles[section];
+                sectionDiv.appendChild(sectionTitle);
+
+                for (let category in organized[section]) {
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.className = 'category-group';
+                    
+                    const categoryTitle = document.createElement('div');
+                    categoryTitle.className = 'category-title';
+                    categoryTitle.textContent = category;
+                    categoryDiv.appendChild(categoryTitle);
+
+                    organized[section][category].forEach(skill => {
+                        const skillDiv = document.createElement('div');
+                        skillDiv.className = 'skill-item';
+                        
+                        const skillName = document.createElement('span');
+                        skillName.className = 'skill-name';
+                        skillName.textContent = skill.skill;
+                        skillDiv.appendChild(skillName);
+
+                        const controls = document.createElement('div');
+                        controls.className = 'skill-controls';
+
+                        if (status === 'Unknown') {
+                            // In Unknown column, click anywhere to move to Familiar
+                            skillDiv.style.cursor = 'pointer';
+                            skillDiv.onclick = () => moveSkill(skill, 'Familiar');
+                        } else {
+                            // In other columns, show arrow controls
+                            const leftArrow = document.createElement('button');
+                            leftArrow.className = 'arrow-btn';
+                            leftArrow.innerHTML = '←';
+                            leftArrow.onclick = () => {
+                                if (status === 'Familiar') {
+                                    moveSkill(skill, 'Unknown');
+                                } else if (status === 'I Understand This') {
+                                    moveSkill(skill, 'Familiar');
+                                }
+                            };
+                            controls.appendChild(leftArrow);
+
+                            const rightArrow = document.createElement('button');
+                            rightArrow.className = 'arrow-btn';
+                            rightArrow.innerHTML = '→';
+                            if (status === 'I Understand This') {
+                                rightArrow.disabled = true;
+                            }
+                            rightArrow.onclick = () => {
+                                if (status === 'Familiar') {
+                                    moveSkill(skill, 'I Understand This');
+                                }
+                            };
+                            controls.appendChild(rightArrow);
+
+                            skillDiv.appendChild(controls);
+                        }
+
+                        categoryDiv.appendChild(skillDiv);
+                    });
+
+                    sectionDiv.appendChild(categoryDiv);
+                }
+
+                column.appendChild(sectionDiv);
+            }
+        }
+
+        // Move a skill to a different status
+        function moveSkill(skill, newStatus) {
+            skill.status = newStatus;
+            saveProgress();
+            renderColumns();
+        }
+
+        // Update progress counts
+        function updateCounts() {
+            let unknown = 0, familiar = 0, understand = 0;
+            
+            for (let section in skillsData) {
+                if (section === 'exportDate' || section === 'summary') continue;
+                if (!Array.isArray(skillsData[section])) continue;
+                
+                skillsData[section].forEach(skill => {
+                    if (skill.status === 'Unknown') unknown++;
+                    else if (skill.status === 'Familiar') familiar++;
+                    else if (skill.status === 'I Understand This') understand++;
+                });
+            }
+
+            document.getElementById('unknown-count').textContent = unknown;
+            document.getElementById('familiar-count').textContent = familiar;
+            document.getElementById('understand-count').textContent = understand;
+        }
+
+        // Update breakdown by category
+        function updateBreakdown() {
+            const sections = ['ai', 'developer', 'github'];
+            
+            sections.forEach(section => {
+                let unknown = 0, familiar = 0, understand = 0, total = 0;
+                
+                if (!skillsData[section] || !Array.isArray(skillsData[section])) return;
+                
+                skillsData[section].forEach(skill => {
+                    total++;
+                    if (skill.status === 'Unknown') unknown++;
+                    else if (skill.status === 'Familiar') familiar++;
+                    else if (skill.status === 'I Understand This') understand++;
+                });
+
+                const breakdownDiv = document.getElementById(`${section}-breakdown`);
+                if (!breakdownDiv) return;
+                
+                breakdownDiv.innerHTML = `
+                    <div class="breakdown-stat">
+                        <span class="breakdown-label">Unknown</span>
+                        <span class="breakdown-value" style="color: #6c757d;">${unknown}</span>
+                    </div>
+                    <div class="breakdown-bar">
+                        <div class="breakdown-bar-fill unknown" style="width: ${total > 0 ? (unknown/total)*100 : 0}%"></div>
+                    </div>
+                    <div class="breakdown-stat">
+                        <span class="breakdown-label">Familiar</span>
+                        <span class="breakdown-value" style="color: #ffc107;">${familiar}</span>
+                    </div>
+                    <div class="breakdown-bar">
+                        <div class="breakdown-bar-fill familiar" style="width: ${total > 0 ? (familiar/total)*100 : 0}%"></div>
+                    </div>
+                    <div class="breakdown-stat">
+                        <span class="breakdown-label">Understand</span>
+                        <span class="breakdown-value" style="color: #28a745;">${understand}</span>
+                    </div>
+                    <div class="breakdown-bar">
+                        <div class="breakdown-bar-fill understand" style="width: ${total > 0 ? (understand/total)*100 : 0}%"></div>
+                    </div>
+                `;
+            });
+        }
+
+        // Export to JSON
+        function exportToJSON() {
+            const exportData = {
+                exportDate: new Date().toISOString(),
+                ai: skillsData.ai,
+                developer: skillsData.developer,
+                github: skillsData.github,
+                summary: {
+                    ai: calculateSummary('ai'),
+                    developer: calculateSummary('developer'),
+                    github: calculateSummary('github')
+                }
+            };
+
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `ai-class-progress-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        // Calculate summary for a section
+        function calculateSummary(section) {
+            let unknown = 0, familiar = 0, understand = 0;
+            
+            if (!skillsData[section] || !Array.isArray(skillsData[section])) {
+                return { unknown: 0, familiar: 0, understand: 0 };
+            }
+            
+            skillsData[section].forEach(skill => {
+                if (skill.status === 'Unknown') unknown++;
+                else if (skill.status === 'Familiar') familiar++;
+                else if (skill.status === 'I Understand This') understand++;
+            });
+
+            return { unknown, familiar, understand };
+        }
+
+        // Reset all progress
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
+                for (let section in skillsData) {
+                    if (section === 'exportDate') continue;
+                    skillsData[section].forEach(skill => {
+                        skill.status = 'Unknown';
+                    });
+                }
+                saveProgress();
+                renderColumns();
+            }
+        }
+
+        // Export to PDF
+        function exportToPDF() {
+            const element = document.getElementById('tracker');
+            const opt = {
+                margin: 10,
+                filename: 'ai-coding-essentials-progress.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
+            };
+            html2pdf().set(opt).from(element).save();
+        }
+
+        // Initialize on page load
+        loadProgress();
+        renderColumns();
+    </script>
+</body>
+</html>
