@@ -773,15 +773,109 @@
 
         // Export to PDF
         function exportToPDF() {
-            const element = document.getElementById('tracker');
+            // Create a simplified version for PDF
+            const pdfContent = document.createElement('div');
+            pdfContent.style.padding = '15px';
+            pdfContent.style.fontFamily = 'Arial, sans-serif';
+            
+            // Add title
+            const title = document.createElement('h1');
+            title.textContent = 'AI Coding Essentials - Progress Tracker';
+            title.style.fontSize = '16px';
+            title.style.marginBottom = '5px';
+            title.style.textAlign = 'center';
+            pdfContent.appendChild(title);
+            
+            // Add date
+            const date = document.createElement('p');
+            date.textContent = new Date().toLocaleDateString();
+            date.style.fontSize = '9px';
+            date.style.textAlign = 'center';
+            date.style.marginBottom = '10px';
+            pdfContent.appendChild(date);
+            
+            // Create three-column layout
+            const columnsContainer = document.createElement('div');
+            columnsContainer.style.display = 'grid';
+            columnsContainer.style.gridTemplateColumns = 'repeat(3, 1fr)';
+            columnsContainer.style.gap = '10px';
+            
+            // Process each status column
+            ['Unknown', 'Familiar', 'I Understand This'].forEach(status => {
+                const columnDiv = document.createElement('div');
+                
+                const columnHeader = document.createElement('h2');
+                columnHeader.textContent = status;
+                columnHeader.style.fontSize = '11px';
+                columnHeader.style.marginBottom = '5px';
+                columnHeader.style.borderBottom = '1px solid #000';
+                columnHeader.style.paddingBottom = '2px';
+                columnDiv.appendChild(columnHeader);
+                
+                // Process each section
+                const sections = ['ai', 'developer', 'github'];
+                const sectionTitles = {
+                    'ai': 'AI Essentials',
+                    'developer': 'Developer Essentials',
+                    'github': 'GitHub Essentials'
+                };
+                
+                sections.forEach(section => {
+                    const sectionSkills = skillsData[section].filter(skill => skill.status === status);
+                    
+                    if (sectionSkills.length > 0) {
+                        const sectionTitle = document.createElement('div');
+                        sectionTitle.textContent = sectionTitles[section];
+                        sectionTitle.style.fontSize = '9px';
+                        sectionTitle.style.fontWeight = 'bold';
+                        sectionTitle.style.marginTop = '6px';
+                        sectionTitle.style.marginBottom = '2px';
+                        columnDiv.appendChild(sectionTitle);
+                        
+                        // Group by category
+                        const categories = {};
+                        sectionSkills.forEach(skill => {
+                            if (!categories[skill.category]) {
+                                categories[skill.category] = [];
+                            }
+                            categories[skill.category].push(skill.skill);
+                        });
+                        
+                        for (let category in categories) {
+                            const categoryTitle = document.createElement('div');
+                            categoryTitle.textContent = category;
+                            categoryTitle.style.fontSize = '8px';
+                            categoryTitle.style.color = '#666';
+                            categoryTitle.style.marginTop = '3px';
+                            categoryTitle.style.marginBottom = '1px';
+                            columnDiv.appendChild(categoryTitle);
+                            
+                            categories[category].forEach(skillName => {
+                                const skillDiv = document.createElement('div');
+                                skillDiv.textContent = skillName;
+                                skillDiv.style.fontSize = '7px';
+                                skillDiv.style.marginLeft = '5px';
+                                skillDiv.style.marginBottom = '1px';
+                                columnDiv.appendChild(skillDiv);
+                            });
+                        }
+                    }
+                });
+                
+                columnsContainer.appendChild(columnDiv);
+            });
+            
+            pdfContent.appendChild(columnsContainer);
+            
             const opt = {
-                margin: 10,
+                margin: [8, 8, 8, 8],
                 filename: 'ai-coding-essentials-progress.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2 },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
-            html2pdf().set(opt).from(element).save();
+            
+            html2pdf().set(opt).from(pdfContent).save();
         }
 
         // Initialize on page load
