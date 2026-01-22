@@ -56,10 +56,10 @@
         }
 
         button {
-            padding: 8px 16px;
+            padding: 6px 12px;
             border: none;
             border-radius: 5px;
-            font-size: 0.85em;
+            font-size: 0.75em;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 600;
@@ -79,6 +79,7 @@
         .pdf-btn {
             background: #28a745;
             color: white;
+            margin-left: auto;
         }
 
         .pdf-btn:hover {
@@ -99,7 +100,6 @@
         }
 
         .progress-summary {
-            margin-left: auto;
             display: flex;
             gap: 12px;
             align-items: center;
@@ -205,7 +205,7 @@
         }
 
         .breakdown-bar-fill.unknown {
-            background: #6c757d;
+            background: #969ea4;
         }
 
         .breakdown-bar-fill.familiar {
@@ -375,9 +375,6 @@
         </header>
 
         <div class="controls">
-            <button class="reset-btn" onclick="resetProgress()">🔄 Reset All Progress</button>
-            <button class="pdf-btn" onclick="exportToPDF()">📄 Save as PDF</button>
-            <button class="json-btn" onclick="exportToJSON()">💾 Export JSON</button>
             <div class="progress-summary">
                 <div class="progress-item">
                     <span class="progress-dot" style="background: #6c757d;"></span>
@@ -392,6 +389,9 @@
                     <span id="understand-count">0</span> Understand
                 </div>
             </div>
+            <button class="pdf-btn" onclick="exportToPDF()">📄 Save as PDF</button>
+            <button class="json-btn" onclick="exportToJSON()">💾 Export JSON</button>
+            <button class="reset-btn" onclick="resetProgress()">🔄 Reset All Progress</button>
         </div>
 
         <div class="breakdown-section">
@@ -602,6 +602,27 @@
                             // In Unknown column, click anywhere to move to Familiar
                             skillDiv.style.cursor = 'pointer';
                             skillDiv.onclick = () => moveSkill(skill, 'Familiar');
+                            
+                            // Add arrows to Unknown
+                            const leftArrow = document.createElement('button');
+                            leftArrow.className = 'arrow-btn';
+                            leftArrow.innerHTML = '←';
+                            leftArrow.onclick = (e) => {
+                                e.stopPropagation(); // Prevent triggering the click-to-Familiar
+                                moveSkill(skill, 'I Understand This');
+                            };
+                            controls.appendChild(leftArrow);
+
+                            const rightArrow = document.createElement('button');
+                            rightArrow.className = 'arrow-btn';
+                            rightArrow.innerHTML = '→';
+                            rightArrow.onclick = (e) => {
+                                e.stopPropagation(); // Prevent triggering the click-to-Familiar
+                                moveSkill(skill, 'Familiar');
+                            };
+                            controls.appendChild(rightArrow);
+                            
+                            skillDiv.appendChild(controls);
                         } else {
                             // In other columns, show arrow controls
                             const leftArrow = document.createElement('button');
@@ -619,12 +640,11 @@
                             const rightArrow = document.createElement('button');
                             rightArrow.className = 'arrow-btn';
                             rightArrow.innerHTML = '→';
-                            if (status === 'I Understand This') {
-                                rightArrow.disabled = true;
-                            }
                             rightArrow.onclick = () => {
                                 if (status === 'Familiar') {
                                     moveSkill(skill, 'I Understand This');
+                                } else if (status === 'I Understand This') {
+                                    moveSkill(skill, 'Unknown');
                                 }
                             };
                             controls.appendChild(rightArrow);
@@ -696,14 +716,14 @@
                     <div class="breakdown-bar">
                         <div class="breakdown-bar-fill unknown" style="width: ${total > 0 ? (unknown/total)*100 : 0}%"></div>
                     </div>
-                    <div class="breakdown-stat">
+                    <div class="breakdown-stat" style="margin-top: 3px;">
                         <span class="breakdown-label">Familiar</span>
                         <span class="breakdown-value" style="color: #ffc107;">${familiar}</span>
                     </div>
                     <div class="breakdown-bar">
                         <div class="breakdown-bar-fill familiar" style="width: ${total > 0 ? (familiar/total)*100 : 0}%"></div>
                     </div>
-                    <div class="breakdown-stat">
+                    <div class="breakdown-stat" style="margin-top: 3px;">
                         <span class="breakdown-label">Understand</span>
                         <span class="breakdown-value" style="color: #28a745;">${understand}</span>
                     </div>
@@ -872,7 +892,7 @@
                 filename: 'ai-coding-essentials-progress.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2 },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                jsPDF: { unit: 'mm', format: 'letter', orientation: 'portrait' }
             };
             
             html2pdf().set(opt).from(pdfContent).save();
