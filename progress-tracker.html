@@ -781,7 +781,7 @@
             // Add title
             const title = document.createElement('h1');
             title.textContent = 'AI Coding Essentials - Progress Tracker';
-            title.style.fontSize = '16px';
+            title.style.fontSize = '14px';
             title.style.marginBottom = '5px';
             title.style.textAlign = 'center';
             pdfContent.appendChild(title);
@@ -789,16 +789,16 @@
             // Add date
             const date = document.createElement('p');
             date.textContent = new Date().toLocaleDateString();
-            date.style.fontSize = '9px';
+            date.style.fontSize = '11px';
             date.style.textAlign = 'center';
-            date.style.marginBottom = '10px';
+            date.style.marginBottom = '12px';
             pdfContent.appendChild(date);
             
             // Create three-column layout
             const columnsContainer = document.createElement('div');
             columnsContainer.style.display = 'grid';
             columnsContainer.style.gridTemplateColumns = 'repeat(3, 1fr)';
-            columnsContainer.style.gap = '10px';
+            columnsContainer.style.gap = '12px';
             
             // Process each status column
             ['Unknown', 'Familiar', 'I Understand This'].forEach(status => {
@@ -806,10 +806,10 @@
                 
                 const columnHeader = document.createElement('h2');
                 columnHeader.textContent = status;
-                columnHeader.style.fontSize = '11px';
-                columnHeader.style.marginBottom = '5px';
+                columnHeader.style.fontSize = '13px';
+                columnHeader.style.marginBottom = '6px';
                 columnHeader.style.borderBottom = '1px solid #000';
-                columnHeader.style.paddingBottom = '2px';
+                columnHeader.style.paddingBottom = '3px';
                 columnDiv.appendChild(columnHeader);
                 
                 // Process each section
@@ -826,10 +826,10 @@
                     if (sectionSkills.length > 0) {
                         const sectionTitle = document.createElement('div');
                         sectionTitle.textContent = sectionTitles[section];
-                        sectionTitle.style.fontSize = '9px';
+                        sectionTitle.style.fontSize = '11px';
                         sectionTitle.style.fontWeight = 'bold';
-                        sectionTitle.style.marginTop = '6px';
-                        sectionTitle.style.marginBottom = '2px';
+                        sectionTitle.style.marginTop = '7px';
+                        sectionTitle.style.marginBottom = '3px';
                         columnDiv.appendChild(sectionTitle);
                         
                         // Group by category
@@ -844,18 +844,18 @@
                         for (let category in categories) {
                             const categoryTitle = document.createElement('div');
                             categoryTitle.textContent = category;
-                            categoryTitle.style.fontSize = '8px';
+                            categoryTitle.style.fontSize = '9px';
                             categoryTitle.style.color = '#666';
-                            categoryTitle.style.marginTop = '3px';
-                            categoryTitle.style.marginBottom = '1px';
+                            categoryTitle.style.marginTop = '4px';
+                            categoryTitle.style.marginBottom = '2px';
                             columnDiv.appendChild(categoryTitle);
                             
                             categories[category].forEach(skillName => {
                                 const skillDiv = document.createElement('div');
                                 skillDiv.textContent = skillName;
-                                skillDiv.style.fontSize = '7px';
-                                skillDiv.style.marginLeft = '5px';
-                                skillDiv.style.marginBottom = '1px';
+                                skillDiv.style.fontSize = '9px';
+                                skillDiv.style.marginLeft = '6px';
+                                skillDiv.style.marginBottom = '2px';
                                 columnDiv.appendChild(skillDiv);
                             });
                         }
