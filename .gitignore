@@ -15,13 +15,8 @@ env/
 ENV/
 .venv
 
-# Data files (generated during exercises)
-*.csv
-*.json
-*.html
-*.png
-*.jpg
-*.jpeg
+# Student workspace - files here will NOT be committed
+scratch/
 
 # IDE
 .vscode/
