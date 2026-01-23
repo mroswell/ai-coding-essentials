@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+    Met Museum Art Explorer
+    
+    IMPORTANT: This will not work in the artifact viewer due to CORS restrictions,
+    but it WILL work perfectly when deployed to GitHub Pages!
+    
+    Deploy to GitHub Pages:
+    1. Create a new GitHub repository
+    2. Upload this file as "index.html"
+    3. Enable GitHub Pages in Settings > Pages
+    4. Visit your site at: https://YOUR-USERNAME.github.io/REPO-NAME/
+    
+    See GITHUB_PAGES_INSTRUCTIONS.md for detailed steps.
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Met Museum Art Explorer</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        header {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #e2e8f0;
+        }
+        header .container {
+            padding: 1.5rem 1rem;
+        }
+        h1 {
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: #0f172a;
+            margin: 0 0 0.25rem 0;
+        }
+        .subtitle {
+            color: #475569;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+        .dept-selector label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 0.75rem;
+        }
+        .dept-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .dept-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #f1f5f9;
+            color: #334155;
+        }
+        .dept-btn:hover {
+            background: #e2e8f0;
+        }
+        .dept-btn.active {
+            background: #2563eb;
+            color: white;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+        .loading {
+            text-align: center;
+            padding: 5rem 0;
+        }
+        .spinner {
+            display: inline-block;
+            width: 3rem;
+            height: 3rem;
+            border: 3px solid #e2e8f0;
+            border-top-color: #2563eb;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .error {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            color: #991b1b;
+        }
+        .artwork-card {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .artwork-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .artwork-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .artwork-image-section {
+            background: #f8fafc;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .artwork-img {
+            max-height: 500px;
+            max-width: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .artwork-details {
+            padding: 2rem;
+        }
+        .artwork-title {
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: #0f172a;
+            margin: 0 0 1rem 0;
+        }
+        .detail-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .detail-item {
+            color: #334155;
+            margin-bottom: 0.75rem;
+        }
+        .detail-label {
+            font-weight: 600;
+        }
+        .detail-bio {
+            color: #64748b;
+            font-size: 0.875rem;
+            margin-left: 0.5rem;
+        }
+        .credit {
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-top: 1rem;
+        }
+        .button-group {
+            margin-top: 2rem;
+            display: flex;
+            gap: 0.75rem;
+        }
+        .btn {
+            flex: 1;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+        .btn-primary:hover {
+            background: #1d4ed8;
+            box-shadow: 0 6px 8px rgba(37, 99, 235, 0.3);
+        }
+        .btn-secondary {
+            background: #475569;
+            color: white;
+            box-shadow: 0 4px 6px rgba(71, 85, 105, 0.2);
+        }
+        .btn-secondary:hover {
+            background: #334155;
+            box-shadow: 0 6px 8px rgba(71, 85, 105, 0.3);
+        }
+        .public-domain {
+            margin-top: 1rem;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+        }
+        .public-domain p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: #166534;
+            font-weight: 500;
+        }
+        footer {
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 3rem;
+        }
+        footer .container {
+            padding: 1.5rem 1rem;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+        footer a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>🎨 Met Museum Art Explorer</h1>
+            <p class="subtitle">
+                Discover treasures from the Metropolitan Museum of Art
+            </p>
+        </div>
+    </header>
+
+    <!-- Department Selector -->
+    <div class="container">
+        <div class="card dept-selector">
+            <label>Choose a Department:</label>
+            <div class="dept-buttons" id="dept-buttons"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p style="margin-top: 1rem; color: #64748b;">Loading artwork...</p>
+        </div>
+
+        <div id="error" class="error hidden"></div>
+
+        <div id="artwork-container" class="hidden"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            Data provided by the
+            <a href="https://www.metmuseum.org/" target="_blank" rel="noopener noreferrer">
+                Metropolitan Museum of Art
+            </a>
+            via their
+            <a href="https://metmuseum.github.io/" target="_blank" rel="noopener noreferrer">
+                Open Access API
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        const DEPARTMENTS = [
+            { id: 11, name: "European Paintings" },
+            { id: 10, name: "Egyptian Art" },
+            { id: 13, name: "Greek and Roman Art" },
+            { id: 5, name: "Medieval Art" },
+            { id: 21, name: "Modern and Contemporary Art" },
+            { id: 6, name: "Asian Art" },
+            { id: 14, name: "Photography" },
+            { id: 4, name: "Arms and Armor" },
+            { id: 15, name: "The American Wing" }
+        ];
+
+        let artworks = [];
+        let selectedDept = 11;
+
+        // Initialize department buttons
+        const deptButtonsContainer = document.getElementById('dept-buttons');
+        DEPARTMENTS.forEach(dept => {
+            const button = document.createElement('button');
+            button.className = 'dept-btn';
+            button.textContent = dept.name;
+            button.onclick = () => selectDepartment(dept.id);
+            button.dataset.deptId = dept.id;
+            deptButtonsContainer.appendChild(button);
+        });
+
+        function selectDepartment(deptId) {
+            selectedDept = deptId;
+            // Update button styles
+            document.querySelectorAll('.dept-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.deptId == deptId);
+            });
+            fetchArtworks();
+        }
+
+        function showLoading() {
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('error').classList.add('hidden');
+            document.getElementById('artwork-container').classList.add('hidden');
+        }
+
+        function showError(message) {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('error').textContent = message;
+            document.getElementById('error').classList.remove('hidden');
+            document.getElementById('artwork-container').classList.add('hidden');
+        }
+
+        function showArtwork() {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('error').classList.add('hidden');
+            document.getElementById('artwork-container').classList.remove('hidden');
+        }
+
+        async function fetchArtworks() {
+            showLoading();
+            
+            try {
+                const searchUrl = `https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=${selectedDept}&hasImages=true&q=*`;
+                const response = await fetch(searchUrl);
+                const data = await response.json();
+                
+                if (data.objectIDs && data.objectIDs.length > 0) {
+                    // Get random sample
+                    artworks = data.objectIDs
+                        .sort(() => Math.random() - 0.5)
+                        .slice(0, 50);
+                    
+                    loadArtwork(artworks[0]);
+                } else {
+                    showError("No artworks found in this department");
+                }
+            } catch (err) {
+                showError("Failed to load artworks: " + err.message);
+            }
+        }
+
+        async function loadArtwork(objectId) {
+            showLoading();
+            
+            try {
+                const artworkUrl = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectId}`;
+                const response = await fetch(artworkUrl);
+                const artwork = await response.json();
+                
+                if (artwork.primaryImage) {
+                    displayArtwork(artwork);
+                } else {
+                    // Try next artwork
+                    const nextIndex = artworks.indexOf(objectId) + 1;
+                    if (nextIndex < artworks.length) {
+                        loadArtwork(artworks[nextIndex]);
+                    } else {
+                        showError("No more artworks with images available");
+                    }
+                }
+            } catch (err) {
+                showError("Failed to load artwork details: " + err.message);
+            }
+        }
+
+        function displayArtwork(artwork) {
+            const container = document.getElementById('artwork-container');
+            
+            let detailsHTML = '';
+            
+            if (artwork.artistDisplayName) {
+                detailsHTML += `
+                    <li class="detail-item">
+                        <span class="detail-label">Artist:</span> ${artwork.artistDisplayName}
+                        ${artwork.artistDisplayBio ? `<span class="detail-bio">${artwork.artistDisplayBio}</span>` : ''}
+                    </li>
+                `;
+            }
+            
+            if (artwork.objectDate) {
+                detailsHTML += `<li class="detail-item"><span class="detail-label">Date:</span> ${artwork.objectDate}</li>`;
+            }
+            
+            if (artwork.medium) {
+                detailsHTML += `<li class="detail-item"><span class="detail-label">Medium:</span> ${artwork.medium}</li>`;
+            }
+            
+            if (artwork.dimensions) {
+                detailsHTML += `<li class="detail-item"><span class="detail-label">Dimensions:</span> ${artwork.dimensions}</li>`;
+            }
+            
+            if (artwork.culture) {
+                detailsHTML += `<li class="detail-item"><span class="detail-label">Culture:</span> ${artwork.culture}</li>`;
+            }
+            
+            if (artwork.classification) {
+                detailsHTML += `<li class="detail-item"><span class="detail-label">Classification:</span> ${artwork.classification}</li>`;
+            }
+            
+            container.innerHTML = `
+                <div class="artwork-card">
+                    <div class="artwork-grid">
+                        <div class="artwork-image-section">
+                            <img src="${artwork.primaryImage}" alt="${artwork.title}" class="artwork-img">
+                        </div>
+                        <div class="artwork-details">
+                            <h2 class="artwork-title">${artwork.title || 'Untitled'}</h2>
+                            <ul class="detail-list">
+                                ${detailsHTML}
+                            </ul>
+                            ${artwork.creditLine ? `<div class="credit">${artwork.creditLine}</div>` : ''}
+                            <div class="button-group">
+                                <button onclick="loadRandomArtwork()" class="btn btn-primary">
+                                    🎲 Discover Another
+                                </button>
+                                <a href="${artwork.objectURL}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                                    View at Met →
+                                </a>
+                            </div>
+                            ${artwork.isPublicDomain ? '<div class="public-domain"><p>✓ Public Domain - Free to use</p></div>' : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            showArtwork();
+        }
+
+        function loadRandomArtwork() {
+            if (artworks.length > 0) {
+                const randomId = artworks[Math.floor(Math.random() * artworks.length)];
+                loadArtwork(randomId);
+            }
+        }
+
+        // Initialize
+        selectDepartment(11);
+    </script>
+</body>
+</html>
