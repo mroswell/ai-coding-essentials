@@ -45,17 +45,22 @@ Learn to understand data formats, create interactive visualizations, and use pro
 
 ### Class 1: Even a Non-Coder can do custom web development
 
-**Focus:** Quick overview of Projects the instructor has built with AI 
-My Chat Search; YouTube Transcript Button; Deduplicate Images, Tag and search thousands of FOIA Documents, Describe images, navigate a large document
+**Sharing:** What are your AI Coding ideas and intentions? General knowledge? Specific projects? 
 
-**Sharing:** What are your AI Coding ideas and intentions? General knowledge? Specific projects? (2 minutes per person; We have 4 students)
+- (2 minutes per person; We have 4 students)
 
 **Focus:** The AI Essentials Progress Tracker
-Spend 5 minutes Filling out your Progress tracker. Optional: Share your results
+
+- Spend 5 minutes Filling out your Progress tracker. Optional: Share your results
 
 **Focus:** Web formats and deployment
 
-Learn HTML, JSON, CSV, and Markdown with an AI chatbot, then build and deploy an interactive quiz for GitHub Pages.
+- Learn HTML, JSON, CSV, and Markdown with an AI chatbot, then build and deploy an interactive quiz for GitHub Pages.
+
+
+**Focus:** Overview of Projects the instructor has built with AI 
+
+- My Chat Search; YouTube Transcript Button; Deduplicate Images, Tag and search thousands of FOIA Documents, Describe images, navigate a large document
 
 
 ### Class 2: Data Analysis and Visualization
