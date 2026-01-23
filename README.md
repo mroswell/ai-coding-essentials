@@ -48,7 +48,7 @@ Learn to understand data formats, create interactive visualizations, and use pro
 **Focus:** Quick overview of Projects the instructor has built with AI 
 My Chat Search; YouTube Transcript Button; Deduplicate Images, Tag and search thousands of FOIA Documents, Describe images, navigate a large document
 
-**Sharing:** What are your AI Coding ideas and intentions? (General knowledge? Specific projects)? (2 minutes per person; We have 4 students)
+**Sharing:** What are your AI Coding ideas and intentions? General knowledge? Specific projects? (2 minutes per person; We have 4 students)
 
 **Focus:** The AI Essentials Progress Tracker
 Spend 5 minutes Filling out your Progress tracker. Optional: Share your results
