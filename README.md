@@ -107,9 +107,22 @@ Detailed exercise files are in the repository:
 - Instructions for organizing projects and updating your portfolio
 
 ---
+## Resources
+- https://www.codecademy.com/courses/learn-git/lessons/git-workflow/exercises/hello-git
 
+## Instructor AI Coding Projects
+- https://MyChatSearch.com (Likely universarlly useful by ChatGPT and Claude users)
+- https://mroswell.github.io/ai-coding-essentials/progress-tracker.html
+- https://mroswell.github.io/ai-coding-essentials (progress tracker, bingo-style)
+- https://mroswell.github.io/ai-coding-essentials/snippets.html
+- https://github.com/mroswell//ai-coding-essentials (GitHub Pages, and Class Exercises for Class 2 and 3)
+- https://github.com/mroswell/supreme-court-decisions (GitHub Actions, GitHub Pages)
+- https://COVIDDocuments.com (Massive trove of FOIA'd documents. I used AI to tag them, and make them filterable by tag.)
+- https://248Pages (rapid site production, structured data extracted from more-than 100-page document)
+- https://fQQuiz.com 
+- https://JudyMatch.com (used AI just to make it responsive (mobile-friendly) in advance of an outdoor party)
 
-
+---
 ## Questions?
 
 Open an Issue in this repository or ask during the workshop.
