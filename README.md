@@ -43,6 +43,8 @@ Learn to understand data formats, create interactive visualizations, and use pro
 
 ## Workshop Structure
 
+**Class Slides ** https://docs.google.com/presentation/d/1eUwCuKALQC74yAAUH3h2I2DxvhLWCwq997uh4Qd02L4/edit?usp=sharing
+
 ### Class 1: Even a Non-Coder can do custom web development
 
 **Sharing:** What are your AI Coding ideas and intentions? General knowledge? Specific projects? 
