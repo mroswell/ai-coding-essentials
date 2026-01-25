@@ -49,18 +49,19 @@ Learn to understand data formats, create interactive visualizations, and use pro
 
 - (2 minutes per person; We have 4 students)
 
-**Focus:** The AI Essentials Progress Tracker
 
-- Spend 5 minutes Filling out your Progress tracker. Optional: Share your results
 
-**Focus:** Web formats and deployment
+**Focus:** Web formats and GitHub Pages deployment
 
 - Learn HTML, JSON, CSV, and Markdown with an AI chatbot, then build and deploy an interactive quiz for GitHub Pages.
-
 
 **Focus:** Overview of Projects the instructor has built with AI 
 
 - My Chat Search; YouTube Transcript Button; Deduplicate Images, Tag and search thousands of FOIA Documents, Describe images, navigate a large document
+
+**Focus:** The AI Essentials Progress Tracker
+
+- Spend 5 minutes Filling out your Progress tracker. Optional: Share your results
 
 
 ### Class 2: Data Analysis and Visualization
