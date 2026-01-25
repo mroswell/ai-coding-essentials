@@ -103,14 +103,14 @@ Use GitHub Codespaces to organize your projects professionally, convert notebook
 ## Exercises
 
 Detailed exercise files are in the repository:
-- Jupyter notebooks for JSON, Markdown, Mapping, and Data Analysis
-- Instructions for organizing projects and updating your portfolio
+- Jupyter notebooks for JSON, Markdown, Mapping, and Data Analysis. We'll work with these in the second class. 
+- 
 
 ---
 ## Resources
 - https://www.codecademy.com/courses/learn-git/lessons/git-workflow/exercises/hello-git
 
-## Instructor AI Coding Projects
+## Instructor-made  AI Coding Projects
 - https://MyChatSearch.com (Likely universarlly useful by ChatGPT and Claude users)
 - https://mroswell.github.io/ai-coding-essentials/progress-tracker.html
 - https://mroswell.github.io/ai-coding-essentials (progress tracker, bingo-style)
@@ -121,6 +121,10 @@ Detailed exercise files are in the repository:
 - https://248Pages (rapid site production, structured data extracted from more-than 100-page document)
 - https://fQQuiz.com 
 - https://JudyMatch.com (used AI just to make it responsive (mobile-friendly) in advance of an outdoor party)
+- A Bookmarklet for grabbing YouTube Videos
+- A bookmarklet for grabbing just the prompts from Claude - https://gist.github.com/mroswell/cb1152f916df73f2c20a5c218c18a310
+- A bookmarklet for converting GitHub Repository page to GitHub Pages page
+- A Tool for deduping photographs
 
 ---
 ## Questions?
