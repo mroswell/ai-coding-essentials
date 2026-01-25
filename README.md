@@ -63,12 +63,14 @@ Learn to understand data formats, create interactive visualizations, and use pro
 
 **Focus:** The AI Essentials Progress Tracker
 
-- Spend 5 minutes Filling out your Progress tracker. Optional: Share your results
 
 **HOMEWORK**
 1. Complete this git tutorial - https://www.codecademy.com/courses/learn-git/lessons/git-workflow/exercises/hello-git
 2. Visit and understand this thread: https://claude.ai/share/00a093fb-1abd-4b64-aca9-9b82ae3f4600, based on this page: https://rogerdudler.github.io/git-guide/
 3. Try to build a portfolio website with https://techfolios.github.io/. If you don't care about a portfolio, build a GitHub Pages website of your choice. Ideas: Quiz, Class Notes, Tutorial
+4. Spend 5 minutes Filling out your Progress tracker. Optional: Share your results
+5. Read your email for Telegram Invite
+
 
 ### Class 2: Data Analysis and Visualization
 **Focus:** Data formats and interactive projects
