@@ -63,16 +63,27 @@ Learn to understand data formats, create interactive visualizations, and use pro
 
 - Spend 5 minutes Filling out your Progress tracker. Optional: Share your results
 
+**HOMEWORK**
+1. Complete this git tutorial - https://www.codecademy.com/courses/learn-git/lessons/git-workflow/exercises/hello-git
+2. Visit and understand this thread: https://claude.ai/share/00a093fb-1abd-4b64-aca9-9b82ae3f4600, based on this page: https://rogerdudler.github.io/git-guide/
+3. Try to build a portfolio website with https://techfolios.github.io/. If you don't care about a portfolio, build a GitHub Pages website of your choice. Ideas: Quiz, Class Notes, Tutorial
 
 ### Class 2: Data Analysis and Visualization
 **Focus:** Data formats and interactive projects
 
 Use Google Colab to build interactive maps and analyze datasets with Python. Create web visualizations you can add to your portfolio.
 
-### Class 3: Professional Development Workflows
-**Focus:** Organization and best practices
+**Focus:** Navigating Codespaces
 
-Use GitHub Codespaces to organize your projects professionally, convert notebooks to proper Python scripts, and update your portfolio with your completed work.
+Launching a Codespace, Web Based IDE, Version Control, Web Server
+
+**Tagging An Artist Archive**
+
+Artist/Author Lynne Cherry has granted use of her artwork for this exercise 
+
+Use 
+### Class 3: Professional Development Workflows
+**Focus:** GitHub Actions
 
 ---
 ## Notes
