@@ -74,6 +74,11 @@ Learn to understand data formats, create interactive visualizations, and use pro
 
 ### Class 2: Data Analysis and Visualization
 
+**Focus:** Navigating in a Python Notebook on Google Colab
+
+- - 00 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mroswell/ai-coding-essentials/blob/main/00_notebook.ipynb)
+
+
 - 01_Markdown [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mroswell/ai-coding-essentials/blob/main/01_markdown.ipynb)
 
 **Focus:** Data formats and interactive projects
