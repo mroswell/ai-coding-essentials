@@ -73,6 +73,8 @@ Learn to understand data formats, create interactive visualizations, and use pro
 
 
 ### Class 2: Data Analysis and Visualization
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mroswell/ai-coding-essentials/blob/BRANCH/01_markdown_fundamentals.ipynb)
 **Focus:** Data formats and interactive projects
 
 Use Google Colab to build interactive maps and analyze datasets with Python. Create web visualizations you can add to your portfolio.
