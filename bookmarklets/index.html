@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevTools Console & Bookmarklets</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #ffffff;
+            --card-bg: #fafafa;
+            --text: #1a1a1a;
+            --text-muted: #666666;
+            --border: #cccccc;
+            --border-light: #e0e0e0;
+            --accent: #2a2a2a;
+            --success: #4a7c59;
+            --highlight: #f0f4f8;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .progress-bar {
+            background: var(--border-light);
+            height: 6px;
+            border-radius: 3px;
+            margin-top: 1.5rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: var(--accent);
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+            border-radius: 3px;
+        }
+
+        .progress-text {
+            text-align: right;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        section {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-light);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+
+        .section-header input[type="checkbox"] {
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+            background: var(--bg);
+        }
+
+        .section-header input[type="checkbox"]:hover {
+            border-color: var(--accent);
+        }
+
+        .section-header input[type="checkbox"]:checked {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .section-header input[type="checkbox"]:checked::after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        h2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+
+
+        .section-content {
+            margin-left: 2.5rem;
+        }
+
+        ul {
+            list-style: disc;
+            padding-left: 1.25rem;
+        }
+
+        li {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 0.4rem;
+        }
+
+        li:last-child {
+            margin-bottom: 0;
+        }
+
+        .nested-list {
+            margin-top: 0.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--highlight);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.85em;
+            color: var(--text);
+        }
+
+        .reset-btn {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            background: transparent;
+            border: 1px solid var(--border-light);
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 1.5rem;
+        }
+
+        .reset-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>&gt;_ DevTools Console & Bookmarklets</h1>
+            <p class="subtitle">A checklist for creating bookmarklets with your chatbot's help</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text"><span id="completedCount">0</span> / <span id="totalCount">0</span> completed</div>
+        </header>
+
+        <section>
+            <div class="section-header">
+                <input type="checkbox" id="section1">
+                <h2><label for="section1">Understand selectors</label></h2>
+            </div>
+            <div class="section-content">
+                <ul>
+                    <li>Learn that a selector can be:
+                        <ul class="nested-list">
+                            <li>A <strong>tag</strong> (e.g., <code>h1</code>, <code>p</code>, <code>div</code>)</li>
+                            <li>An <strong>ID</strong> (e.g., <code>id="main-content"</code>) — unique on the page</li>
+                            <li>A <strong>class</strong> (e.g., <code>class="article-text"</code>) — can appear multiple times</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <input type="checkbox" id="section2">
+                <h2><label for="section2">Find your selector</label></h2>
+            </div>
+            <div class="section-content">
+                <ul>
+                    <li>Right-click the element you want to target on the webpage</li>
+                    <li>Choose "Inspect" to open DevTools</li>
+                    <li>Identify the selector (tag, ID, or class) for that element</li>
+                    <li>Alternatively, click the left-most selector icon in DevTools to select an item on the page</li>
+                    <li>Copy the selector and some surrounding HTML for context</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <input type="checkbox" id="section3">
+                <h2><label for="section3">Get help from your chatbot</label></h2>
+            </div>
+            <div class="section-content">
+                <ul>
+                    <li>Paste the selector and surrounding text into your chatbot</li>
+                    <li>Describe what you want the code to do
+                        <ul class="nested-list">
+                            <li>In this case, copy the text content inside the selected items</li>
+                        </ul>
+                    </li>
+                    <li>Ask your chatbot for a JavaScript snippet to test in DevTools</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <input type="checkbox" id="section4">
+                <h2><label for="section4">Test in DevTools</label></h2>
+            </div>
+            <div class="section-content">
+                <ul>
+                    <li>Open DevTools Console (F12 or right-click → Inspect → Console tab)</li>
+                    <li>Paste the snippet and press Enter</li>
+                    <li>If it works → proceed to next section</li>
+                    <li>If there's an error → copy the error message, paste it back to your chatbot, and repeat</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <input type="checkbox" id="section5">
+                <h2><label for="section5">Create the bookmarklet</label></h2>
+            </div>
+            <div class="section-content">
+                <ul>
+                    <li>Ask your chatbot to convert the working snippet into a bookmarklet</li>
+                    <li>Copy the <code>javascript:...</code> code your chatbot provides</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <input type="checkbox" id="section6">
+                <h2><label for="section6">Install the bookmarklet</label></h2>
+            </div>
+            <div class="section-content">
+                <ul>
+                    <li>Create a new bookmark in your browser</li>
+                    <li>Give it a short, descriptive name</li>
+                    <li>Paste the <code>javascript:...</code> code as the URL</li>
+                    <li>Drag it to your bookmarks bar for easy access</li>
+                </ul>
+            </div>
+        </section>
+
+        <button class="reset-btn" onclick="resetChecklist()">Reset checklist</button>
+    </div>
+
+    <script>
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const totalCount = document.getElementById('totalCount');
+        const completedCount = document.getElementById('completedCount');
+        const progressFill = document.getElementById('progressFill');
+
+        totalCount.textContent = checkboxes.length;
+
+        // Load saved state from localStorage
+        function loadState() {
+            const saved = localStorage.getItem('bookmarklet-checklist');
+            if (saved) {
+                const state = JSON.parse(saved);
+                checkboxes.forEach(cb => {
+                    if (state[cb.id]) {
+                        cb.checked = true;
+                    }
+                });
+            }
+            updateProgress();
+        }
+
+        // Save state to localStorage
+        function saveState() {
+            const state = {};
+            checkboxes.forEach(cb => {
+                state[cb.id] = cb.checked;
+            });
+            localStorage.setItem('bookmarklet-checklist', JSON.stringify(state));
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const completed = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            completedCount.textContent = completed;
+            const percentage = (completed / checkboxes.length) * 100;
+            progressFill.style.width = percentage + '%';
+        }
+
+        // Add event listeners to all checkboxes
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', () => {
+                saveState();
+                updateProgress();
+            });
+        });
+
+        // Reset function
+        function resetChecklist() {
+            checkboxes.forEach(cb => {
+                cb.checked = false;
+            });
+            saveState();
+            updateProgress();
+        }
+
+        // Initialize on page load
+        loadState();
+    </script>
+</body>
+</html>
