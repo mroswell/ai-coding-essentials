@@ -196,11 +196,28 @@
             border-color: var(--accent);
             color: var(--accent);
         }
-        .link-box {
-    border-left: 3px solid #007acc;
-    padding: 8px 16px;
+.link-box {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 16px;
     margin: 16px 0;
-    background-color: #f5f5f5;
+    background-color: #fafafa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.link-box h3 {
+    margin: 0 0 10px 0;
+    font-size: 0.9em;
+    color: #666;
+    font-weight: 500;
+}
+
+.link-box p {
+    margin: 6px 0;
+}
+
+.link-box a {
+    word-break: break-all;
 }
     </style>
 </head>
@@ -209,12 +226,13 @@
         <header>
             <h1>&gt;_ DevTools Console & Bookmarklets</h1>
             <p class="subtitle">A checklist for creating bookmarklets with your chatbot's help</p>
-    <div class="link-box">
-        <p><a href="https://colorlib.com/wp/css3-table-templates/">https://colorlib.com/wp/css3-table-templates/</a></p>
-        <p><a href="https://podscribe.com/podcast-rankings">https://podscribe.com/podcast-rankings</a></p>
-        <p><a href="https://www.metmuseum.org/art/collection/search?department=Thomas+J.+Watson+Library">https://www.metmuseum.org/art/collection/search?department=Thomas+J.+Watson+Library</a></p>
-        <p><a href="https://www.trustpilot.com/categories">https://www.trustpilot.com/categories</a></p>
-    </div>
+<div class="link-box">
+    <h3>Sample Pages for Practice</h3>
+    <p><a href="https://colorlib.com/wp/css3-table-templates/">https://colorlib.com/wp/css3-table-templates/</a></p>
+    <p><a href="https://podscribe.com/podcast-rankings">https://podscribe.com/podcast-rankings</a></p>
+    <p><a href="https://www.metmuseum.org/art/collection/search?department=Thomas+J.+Watson+Library">https://www.metmuseum.org/art/collection/search?department=Thomas+J.+Watson+Library</a></p>
+    <p><a href="https://www.trustpilot.com/categories">https://www.trustpilot.com/categories</a></p>
+</div>
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
