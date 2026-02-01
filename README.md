@@ -76,14 +76,14 @@ Learn to understand data formats, create interactive visualizations, and use pro
 
 **Focus:** Navigating in a Python Notebook on Google Colab
 
-- 00_Notebook [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mroswell/ai-coding-essentials/blob/main/00_notebook.ipynb)
+- 00_notebook [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mroswell/ai-coding-essentials/blob/main/00_notebook.ipynb)
 
 
 **Focus:** Data formats and interactive projects
 
 Use Google Colab to build interactive maps and analyze datasets with Python. Create web visualizations you can add to your portfolio.
 
-- 01_Markdown [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mroswell/ai-coding-essentials/blob/main/01_markdown.ipynb)
+- 01_markdown [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mroswell/ai-coding-essentials/blob/main/01_markdown.ipynb)
 
 **Focus:** Navigating GitHub Codespaces
 
@@ -93,7 +93,7 @@ Launching a Codespace, Web Based IDE, Version Control, Web Server
 
 Artist/Author Lynne Cherry has granted use of her artwork for this exercise 
 
-- 01_Markdown [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mroswell/ai-coding-essentials/blob/main/03_tag_and_describe_images_google.ipynb)
+- 01_tag_and_describe_images_google [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mroswell/ai-coding-essentials/blob/main/03_tag_and_describe_images_google.ipynb)
 
 
 
