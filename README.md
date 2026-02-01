@@ -76,20 +76,19 @@ Learn to understand data formats, create interactive visualizations, and use pro
 
 **Focus:** Navigating in a Python Notebook on Google Colab
 
+Use Google Colab to build interactive analyze datasets with Python. Create visualizations you can add to your portfolio.
+
 - 00_notebook [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mroswell/ai-coding-essentials/blob/main/00_notebook.ipynb)
 
-
-**Focus:** Data formats and interactive projects
-
-Use Google Colab to build interactive maps and analyze datasets with Python. Create web visualizations you can add to your portfolio.
-
+**Optional Homework**
 - 01_markdown [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mroswell/ai-coding-essentials/blob/main/01_markdown.ipynb)
+- 02_json_in_python [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mroswell/ai-coding-essentials/blob/main/02_json_in_python.ipynb)
 
 **Focus:** Navigating GitHub Codespaces
 
 Launching a Codespace, Web Based IDE, Version Control, Web Server
 
-**Tagging An Artist Archive**
+**Focus:** Tagging An Artist Archive
 
 Artist/Author Lynne Cherry has granted use of her artwork for this exercise 
 
@@ -98,6 +97,9 @@ Artist/Author Lynne Cherry has granted use of her artwork for this exercise
 
 
 ### Class 3: Professional Development Workflows
+
+**Focus** Student Presentations
+
 **Focus:** GitHub Actions
 
 ---
