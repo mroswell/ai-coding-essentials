@@ -93,7 +93,10 @@ Launching a Codespace, Web Based IDE, Version Control, Web Server
 
 Artist/Author Lynne Cherry has granted use of her artwork for this exercise 
 
-Use 
+- 01_Markdown [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mroswell/ai-coding-essentials/blob/main/03_tag_and_describe_images_google.ipynb)
+
+
+
 ### Class 3: Professional Development Workflows
 **Focus:** GitHub Actions
 
