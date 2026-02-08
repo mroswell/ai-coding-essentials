@@ -2,6 +2,9 @@
 
 **Three-afternoon workshop on essential AI coding skills**
 
+- [ ] check this
+- [ ] also check this
+      
 Learn to understand data formats, create interactive visualizations, and use professional development tools. No prior programming experience required.
 
 ---
