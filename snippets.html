@@ -416,7 +416,58 @@ When this command runs:
 (Timer: 2–3 minutes)</code></pre>
             </div>
             <div class="description">
-                Add this as a custom slash command in Claude Code at ~/.claude/commands/takebreak.md. Type <code>/takebreak</code> anytime to get a randomly selected desk exercise routine — no scrolling, no decisions, just move.
+                Add this as a custom slash command in Claude Code at <code>~/.claude/commands/takebreak.md</code>. Type <code>/takebreak</code> anytime to get a randomly selected desk exercise routine — no scrolling, no decisions, just move.
+            </div>
+        </div>
+
+        <div class="snippet-card">
+            <div class="snippet-header">
+                <div class="snippet-title">Claude Code — Playwright MCP allowed_tools</div>
+                <button class="copy-btn" onclick="copyCode(this, 'snippet10')">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path>
+                        <path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                    </svg>
+                    Copy
+                </button>
+            </div>
+            <div class="snippet-content">
+                <pre><code id="snippet10" class="language-yaml">allowed_tools:
+  Bash(npm:*),Bash(sqlite3:*),
+
+  # --- Everyday use (you'll need these in almost every workflow) ---
+  mcp__playwright__browser_navigate,
+  mcp__playwright__browser_navigate_back,
+  mcp__playwright__browser_navigate_forward,
+  mcp__playwright__browser_click,
+  mcp__playwright__browser_type,
+  mcp__playwright__browser_snapshot,
+  mcp__playwright__browser_take_screenshot,
+
+  # --- Situational (useful but not every workflow) ---
+  mcp__playwright__browser_select_option,
+  mcp__playwright__browser_hover,
+  mcp__playwright__browser_press_key,
+  mcp__playwright__browser_wait_for,
+  mcp__playwright__browser_handle_dialog,
+  mcp__playwright__browser_tab_new,
+  mcp__playwright__browser_tab_select,
+  mcp__playwright__browser_tab_list,
+  mcp__playwright__browser_tab_close,
+  mcp__playwright__browser_console_messages,
+  mcp__playwright__browser_network_requests,
+
+  # --- Rarely needed (specialist or edge-case tasks) ---
+  mcp__playwright__browser_drag,
+  mcp__playwright__browser_resize,
+  mcp__playwright__browser_file_upload,
+  mcp__playwright__browser_pdf_save,
+  mcp__playwright__browser_close,
+  mcp__playwright__browser_install,
+  mcp__playwright__browser_generate_playwright_test</code></pre>
+            </div>
+            <div class="description">
+                This grants access to npm, sqlite3, and the full Playwright MCP browser toolkit. When using <code>mcp__playwright</code> with GitHub Actions, include this (or a subset of these allowed tools) in <code>.github/actions/your-workflow.yml</code>
             </div>
         </div>
 
