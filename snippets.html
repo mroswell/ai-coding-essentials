@@ -125,6 +125,15 @@
             border-top: 1px solid #e1e4e8;
         }
 
+        .description code {
+            background: #eef0f3;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.85rem;
+            color: #24292e;
+        }
+
         footer {
             text-align: center;
             color: white;
@@ -252,8 +261,6 @@ print(f"First 10 chars: {os.environ.get('ANTHROPIC_API_KEY', '')[:10]}")</code><
             </div>
         </div>
 
-    
-
         <div class="snippet-card">
             <div class="snippet-header">
                 <div class="snippet-title">Open In GitHub (BookMark)</div>
@@ -304,7 +311,6 @@ javascript:(function(){const m=document.querySelectorAll('[data-testid="user-mes
             </div>
         </div>
 
-
         <div class="snippet-card">
             <div class="snippet-header">
                 <div class="snippet-title">Copy Gemini Prompts</div>
@@ -326,7 +332,7 @@ javascript:(function(){const m=document.querySelectorAll('div.query-text');const
             </div>
         </div>
         
-                <div class="snippet-card">
+        <div class="snippet-card">
             <div class="snippet-header">
                 <div class="snippet-title">Copy ChatGPT Prompts</div>
                 <button class="copy-btn" onclick="copyCode(this, 'snippet8')">
@@ -345,7 +351,75 @@ javascript:(function(){const m=document.querySelectorAll('div.whitespace-pre-wra
             <div class="description">
                 Copy prompts from any ChatGPT conversation. (Remember to paste them somewhere)
             </div>
-        </div>    
+        </div>
+
+        <div class="snippet-card">
+            <div class="snippet-header">
+                <div class="snippet-title">/takebreak — Claude Code Command</div>
+                <button class="copy-btn" onclick="copyCode(this, 'snippet9')">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path>
+                        <path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                    </svg>
+                    Copy
+                </button>
+            </div>
+            <div class="snippet-content">
+                <pre><code id="snippet9" class="language-markdown"># /takebreak
+
+When this command runs:
+
+- Randomly select ONE routine from the list below.
+- Print only the selected routine.
+- Keep formatting clean and compact.
+- End with a one-line timer suggestion (e.g., "Set a 3-minute timer and begin.")
+- Do not explain your reasoning.
+
+---
+
+## Routine A — 3-Minute Reset
+- 10 chair squats
+- 10 desk push-ups
+- 15 calf raises
+- 5 slow deep breaths
+
+(Timer: 3 minutes)
+
+---
+
+## Routine B — Seated + Posture
+- 10 shoulder rolls forward + 10 backward
+- Neck stretch (15 sec each side)
+- Seated spinal twist (15 sec each side)
+- 8 seated leg extensions each leg
+
+(Timer: 2–3 minutes)
+
+---
+
+## Routine C — Strength Focus
+- 12 desk push-ups
+- 12 chair squats
+- 20-second wall sit
+- 5 slow deep breaths
+
+(Timer: 3–4 minutes)
+
+---
+
+## Routine D — Quiet + Circulation
+- 30 seconds march in place
+- 15 calf raises
+- 10 ankle circles each direction per foot
+- 5 slow deep breaths
+
+(Timer: 2–3 minutes)</code></pre>
+            </div>
+            <div class="description">
+                Add this as a custom slash command in Claude Code. Type <code>/takebreak</code> anytime to get a randomly selected desk exercise routine — no scrolling, no decisions, just move.
+            </div>
+        </div>
+
         <footer>
             <p>Built for students learning AI coding essentials 💜</p>
         </footer>
@@ -367,7 +441,6 @@ javascript:(function(){const m=document.querySelectorAll('div.whitespace-pre-wra
             const code = codeElement.textContent;
             
             navigator.clipboard.writeText(code).then(() => {
-                // Change button text and style
                 const originalHTML = button.innerHTML;
                 button.innerHTML = `
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
@@ -377,7 +450,6 @@ javascript:(function(){const m=document.querySelectorAll('div.whitespace-pre-wra
                 `;
                 button.classList.add('copied');
                 
-                // Reset after 2 seconds
                 setTimeout(() => {
                     button.innerHTML = originalHTML;
                     button.classList.remove('copied');
